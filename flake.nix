@@ -34,8 +34,8 @@
 		};
 		# home-manager.inputs.nixpkgs.follows = "nixpkgs";
 		nixosConfigurations = {
-			desktop = mkHost {hostName = "desktop"; desktopEnv = "KDE"; displayProtocol = "wayland";};
-			laptop = mkHost {hostName = "laptop"; desktopEnv = "xfce"; displayProtocol = "x11"};
+			nix-btw = mkHost {hostName = "nix-btw"; desktopEnv = "KDE"; displayProtocol = "wayland";};
+			laptop = mkHost {hostName = "laptop"; desktopEnv = "xfce"; displayProtocol = "x11";};
 		};
   	};
 }
