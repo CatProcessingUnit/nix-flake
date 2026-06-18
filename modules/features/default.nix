@@ -1,7 +1,7 @@
 {config, pkgs, lib, ...}:
 {
 	imports = [
-		./features/ssh.nix
+		./ssh.nix
 	];
 
 	features.ssh.enable = lib.mkDefault false;
