@@ -19,11 +19,12 @@
 					(./. + "/hosts/${hostName}/hardware-configuration.nix")
 					(./. + "/modules/desktop/displayProtocol/${displayProtocol}.nix")
 					(./. + "/modules/desktop/${desktopEnv}.nix")
-					./modules/default.nix
+					./modules/features
+					./modules/programs.nix
 				];
 			};
 	in 
-	{
+	{	
 		nix.settings = {
 			substituters = ["https://hyprland.cachix.org"];
 			trusted-substituters = ["https://hyprland.cachix.org"];
@@ -34,6 +35,7 @@
 		};
 		# home-manager.inputs.nixpkgs.follows = "nixpkgs";
 		nixosConfigurations = {
+			desktop = mkHost {hostName = "desktop"; desktopEnv = "KDE"; displayProtocol = "wayland";};
 			nix-btw = mkHost {hostName = "nix-btw"; desktopEnv = "KDE"; displayProtocol = "wayland";};
 			laptop = mkHost {hostName = "laptop"; desktopEnv = "xfce"; displayProtocol = "x11";};
 		};
