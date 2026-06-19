@@ -4,7 +4,8 @@
 
 { config, lib, pkgs, ... }:
 {
-	boot.kernelPackages = pkgs.linuxPackages_zen;
+  #features.samba.enable = true;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
   networking.hostName = "nix-btw"; # Define your hostname.
   
   # Enable networking
