@@ -20,6 +20,8 @@
 					(./. + "/modules/desktop/displayProtocol/${displayProtocol}.nix")
 					(./. + "/modules/desktop/${desktopEnv}.nix")
 					./modules/features
+					./modules/users
+					./modules/system
 					./modules/programs.nix
 				];
 			};
