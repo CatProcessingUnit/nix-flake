@@ -8,15 +8,14 @@
 			default = builtins.null;
 		};
 		displayProtocol = lib.mkOption {
-			type  = lib.types.enum ["x11" "wayland"];
+			type  = lib.types.nullOr (lib.types.enum ["x11" "wayland"]);
 			description = "select display protocol";
-			default = "wayland";
+			default = builtins.null;
 		};
 	};
-
+	
 	imports = [
-		./displayProtocol/x11.nix
-		./displayProtocol/wayland.nix
+		./displayProtocol
 		./KDE.nix
 		./xfce.nix
 		./hyprland.nix
