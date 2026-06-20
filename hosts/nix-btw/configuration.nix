@@ -4,9 +4,9 @@
 
 { config, lib, pkgs, ... }:
 {
-  #features.samba.enable = true;
+  desktop.env = "KDE";
+  desktop.displayProtocol = "wayland"; 
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  networking.hostName = "nix-btw"; # Define your hostname.
   
   # Enable networking
   networking = {

@@ -1,13 +1,11 @@
-{config, pkgs, displayProtocol, ...}:
-
-
-if displayProtocol == "wayland" then
-	throw "wayland not supported"
-else	
+{config, pkgs, lib, ...}:
+	
 {
-	services.xserver.desktopManager = {
-		xterm.enable = false;
-		xfce.enable = true;
+	config = lib.mkIf (config.desktop.env == "xfce") {
+		services.xserver.desktopManager = {
+			xterm.enable = false;
+			xfce.enable = true;
+		};
+		services.displayManager.defaultSession = "xfce";
 	};
-	services.displayManager.defaultSession = "xfce";
 }

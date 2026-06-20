@@ -1,9 +1,11 @@
 # kde with wayland
 
-{config, pkgs, ...}:
+{config, pkgs, lib, ...}:
 
 {
-	services = {
-		desktopManager.plasma6.enable=true;
+	config = lib.mkIf (config.desktop.env == "KDE") {
+		services = {
+			desktopManager.plasma6.enable=true;
+		};
 	};
 }

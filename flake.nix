@@ -2,27 +2,26 @@
   description = "A very basic flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-26.05";
     #home-manager.url = "github:nix-community/home-manager";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }: 
 	let 
-		mkHost = {hostName, desktopEnv, displayProtocol ? "wayland"}: 
+		mkHost = {hostName}: 
 			nixpkgs.lib.nixosSystem {
 				system = "x86_64-linux";
-				specialArgs = {
-					inherit displayProtocol;
-				};
 				modules = [
 					(./. + "/hosts/${hostName}/configuration.nix")
-					(./. + "/hosts/${hostName}/hardware-configuration.nix")
-					(./. + "/modules/desktop/displayProtocol/${displayProtocol}.nix")
-					(./. + "/modules/desktop/${desktopEnv}.nix")
+					(./. + "/hosts/${hostName}/hardware-configuration.nix")	
 					./modules/features
 					./modules/users
 					./modules/system
+					./modules/desktop
 					./modules/programs.nix
+					{
+						networking.hostName = hostName;
+					}
 				];
 			};
 	in 
@@ -37,10 +36,8 @@
 			trusted-users = ["root" "@wheel"];
 		};
 		# home-manager.inputs.nixpkgs.follows = "nixpkgs";
-		nixosConfigurations = {
-			desktop = mkHost {hostName = "desktop"; desktopEnv = "KDE"; displayProtocol = "wayland";};
-			nix-btw = mkHost {hostName = "nix-btw"; desktopEnv = "KDE"; displayProtocol = "wayland";};
-			laptop = mkHost {hostName = "laptop"; desktopEnv = "xfce"; displayProtocol = "x11";};
+		nixosConfigurations = {	
+			nix-btw = mkHost {hostName = "nix-btw";};
 		};
   	};
 }
