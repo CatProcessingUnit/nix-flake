@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./test.nix
+    ./test
   ];
 
   users.test.enable = lib.mkDefault true;

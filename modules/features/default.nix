@@ -1,10 +1,10 @@
 {config, pkgs, lib, ...}:
 {
 	imports = [
+		./overlays
 		./ssh.nix
 		./samba.nix
 	];
 
-	features.ssh.enable = lib.mkDefault false;
-	features.samba.enable = lib.mkDefault false;
+	overlays.KDE.enable = lib.mkDefault true;
 }

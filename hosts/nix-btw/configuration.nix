@@ -5,9 +5,11 @@
 { config, lib, pkgs, ... }:
 {
   desktop.env = "KDE";
-  desktop.displayProtocol = "wayland"; 
+  desktop.displayProtocol = "wayland";
+  overlays.KDE.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  
+  features.samba.enable = true;
+  features.ssh.enable = true;
   # Enable networking
   networking = {
 	networkmanager = {

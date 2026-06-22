@@ -22,6 +22,15 @@
 		#  wget
 		kitty
 		fastfetch
-		vscode.fhs
+		(vscode-with-extensions.override {
+			vscodeExtensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+				{
+					name = "Vim";
+					publisher = "vscodevim";
+					version = "1.32.4";
+					sha256 = "+hyJZinWsa6U+s0fdrx2wUi6tOV3FNKf8O1qMMZEdkQ=";
+				}
+			];
+		})	
 	];	
 }
