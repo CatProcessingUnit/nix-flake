@@ -3,7 +3,7 @@
 {
    environment.systemPackages = with pkgs; [
 	vim
-	home-manager
+	#home-manager
    ];
 
    programs = {

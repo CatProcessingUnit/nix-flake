@@ -42,14 +42,14 @@
 					./modules/system
 					./modules/desktop
 					
-					# imports home-manager module
-					# 
-					inputs.home-manager.nixosModules.default 
-					{
-						home-manager = {
-							useGlobalPkgs = true;
-						};	
-					}
+					# imports home-manager module 
+					#inputs.home-manager.nixosModules.default 
+					#{
+					#	home-manager = {
+					#		useGlobalPkgs = true;
+					#		useUserPackages = true;
+					#	};	
+					#}
 				];
 			};
 	in 
@@ -62,7 +62,6 @@
 			# Use @wheel for all sudo users, or list your username explicitly.
 			trusted-users = ["root" "@wheel"];
 		};
-		
 		# declare hosts
 		nixosConfigurations = {	
 			nix-btw = mkHost {hostName = "nix-btw";};
@@ -76,7 +75,8 @@
 			};
 
 			modules = [
-				./home/test/home.nix
+				#./home/test/home.nix
+				(homeDirectory + "/test/home.nix")
 			];
 		};
   	};

@@ -21,7 +21,7 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
      hello
-
+     lolcat
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -35,10 +35,20 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
-
+  xdg.terminal-exec = {
+	enable = true;
+	settings = {
+		default = [
+			"kitty.desktop"
+		];
+	};
+  };
   programs = {
   	kitty = {
 		enable = true;
+		#themeFile = "Campbell";
+		#theme = "Gruvbox Material Dark Medium";
+		themeFile = "GruvboxMaterialDarkMedium";
 	};
 	firefox = {
 		enable = true;
