@@ -58,6 +58,10 @@
 	};
 	git = {
 		enable = true;
+		config.user = {
+			name = "CatProcessingUnit";
+			email = "39676061+CatProcessingUnit@users.noreply.github.com";
+		};
 	};
 	vscode = {
 		enable = true;
