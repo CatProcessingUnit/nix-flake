@@ -14,44 +14,9 @@
   outputs = { self, nixpkgs, home-manager, ... }@inputs: 
 	let
 		system = "x86_64-linux";
-
+		myLib = import ./myLib;
 		# directory for homeManager
 		homeDirectory = ./home;
-
-		mkHost = {hostName}: 
-			nixpkgs.lib.nixosSystem {
-				# system = "x86_64-linux";
-				# pass inputs to modules
-				inherit system;
-				specialArgs = {
-					inherit inputs;
-					inherit homeDirectory;
-				};
-				modules = [
-					{
-						nixpkgs.config.allowUnfree = true;
-						networking.hostName = hostName;
-					}
-
-					# host specific configuration
-					(./. + "/hosts/${hostName}/configuration.nix")
-					(./. + "/hosts/${hostName}/hardware-configuration.nix")
-
-					./modules/features
-					./modules/users
-					./modules/system
-					./modules/desktop
-					
-					# imports home-manager module 
-					#inputs.home-manager.nixosModules.default 
-					#{
-					#	home-manager = {
-					#		useGlobalPkgs = true;
-					#		useUserPackages = true;
-					#	};	
-					#}
-				];
-			};
 	in 
 	{
 		nix.settings = {
@@ -64,7 +29,7 @@
 		};
 		# declare hosts
 		nixosConfigurations = {	
-			nix-btw = mkHost {hostName = "nix-btw";};
+			nix-btw = myLib.mkHost {hostName = "nix-btw"; system = "x86_64-linux";};
 		};
 
 		# home manager configurations
