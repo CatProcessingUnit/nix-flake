@@ -9,12 +9,14 @@
 	url = "github:nix-community/home-manager/release-26.05";
 	inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: 
 	let
 		system = "x86_64-linux";
-		myLib = import ./myLib;
+		myLib = import ./myLib { inherit self inputs; };
 		# directory for homeManager
 		homeDirectory = ./home;
 	in 
@@ -33,7 +35,7 @@
 		};
 
 		# home manager configurations
-		homeConfigurations."test" = home-manager.lib.homeManagerConfiguration {
+		homeConfigurations."test" = home-manager.lib.homeManagerConfiguration {	
 			pkgs = import nixpkgs {
 				inherit system;
 				config.allowUnfree = true;

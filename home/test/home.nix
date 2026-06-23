@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ self, config, pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -15,6 +15,15 @@
   # release notes.
   home.stateVersion = "26.05"; # Please read the comment before changing.
 
+  #home.file = {
+	#".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim";
+  #};
+  #xdg.configFile = {
+#	"nvim" = {
+#		source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim";
+#		#recursive = true;
+#	};
+#  };
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
@@ -55,12 +64,52 @@
 	};
 	neovim = {
 		enable = true;
+		defaultEditor = true;
+
+		viAlias = true;
+		vimAlias = true;
+		
+		#extraPackages = with pkgs; [
+		#	nixd
+		#];
+
+		plugins = with pkgs.vimPlugins; [
+			gruvbox
+		];
+
+		initLua = ''
+			vim.cmd([[
+				colorscheme gruvbox
+			]])
+
+			local flake_expr = "builtins.getFlake (toString ./.)"	
+
+			vim.lsp.config("nixd", {
+				cmd = { "nixd" },
+				filetypes = { "nix" },
+				root_markers = { "flake.nix", ".git" },
+				settings = {
+					nixd = {
+						nixpkgs = {
+							expr = string.format("import (%s.inputs.nixpkgs) {}", flake_expr),	
+						},
+						formatting = {
+							command = { "alejandra" },
+						},
+					},
+				},
+			})
+			vim.lsp.enable("nixd");
+		'';
+
 	};
 	git = {
 		enable = true;
-		config.user = {
-			name = "CatProcessingUnit";
-			email = "39676061+CatProcessingUnit@users.noreply.github.com";
+		settings = {
+			user = {
+				name = "CatProcessingUnit";
+				email = "39676061+CatProcessingUnit@users.noreply.github.com";
+			};
 		};
 	};
 	vscode = {
@@ -69,7 +118,14 @@
 			jnoortheen.nix-ide
 			oderwat.indent-rainbow
 			vscodevim.vim
+			jdinhlife.gruvbox
 		];
+
+		profiles.default.userSettings = {
+			"telemetry.telemtryLevel" = "off";
+			
+			"workbench.colorTheme" = "Gruvbox Dark Medium";
+		};
 	};
   };
 

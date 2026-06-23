@@ -1,4 +1,4 @@
-{lib, inputs, flakeRoot, ...}:
+flake@{self, lib, inputs, ...}:
 
 let 
    mkHost = {

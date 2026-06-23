@@ -1,14 +1,15 @@
-{self, inputs, lib, flakeRoot, ...}:
+{self, inputs, ...}:
 
 let
+   lib = inputs.nixpkgs.lib // inputs.home-manager.lib;
    flake = {
 	inherit
 		self
 		inputs
-		lib
-		flakeRoot;
+		lib;
+   };
+   exports = {
+	mkHost = (import ./mkHost.nix) flake;
    };
 in
-{
-   mkHost = import ./mkHost.nix flake;
-}
+exports
