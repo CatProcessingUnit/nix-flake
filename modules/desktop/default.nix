@@ -12,13 +12,20 @@
 			description = "select display protocol";
 			default = builtins.null;
 		};
+		displayManager = lib.mkOption {
+			type = lib.types.nullOr lib.types.str;
+			description = "select display manager";
+			default = builtins.null;
+		};
 	};
 	
 	imports = [
 		./displayProtocol
+		./displayManagers
 		./KDE.nix
 		./xfce.nix
 		./hyprland.nix
+		./LXQt.nix
 	];
-
 }
+
