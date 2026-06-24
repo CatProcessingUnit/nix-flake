@@ -32,6 +32,7 @@
 		# declare hosts
 		nixosConfigurations = {	
 			nix-btw = myLib.mkHost {hostName = "nix-btw"; system = "x86_64-linux";};
+			laptop = myLib.mkHost {hostName = "laptop"; system = "x86_64-linux";};
 		};
 
 		# home manager configurations
