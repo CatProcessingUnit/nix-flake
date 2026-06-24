@@ -29,9 +29,11 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  swapDevices = [ 
-	device = "/.swapfile";
-	size = 16*1024; # 16 gb
+  swapDevices = [
+	  {
+		device = "/.swapfile";
+		size = 16*1024; # 16 gb
+	  }
   ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
