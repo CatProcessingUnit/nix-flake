@@ -4,5 +4,6 @@
 		./overlays
 		./ssh.nix
 		./samba.nix
+		./zram.nix
 	];
 }
