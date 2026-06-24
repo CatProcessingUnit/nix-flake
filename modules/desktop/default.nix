@@ -26,6 +26,7 @@
 		./xfce.nix
 		./hyprland.nix
 		./LXQt.nix
+		./i3.nix
 	];
 }
 
