@@ -5,6 +5,4 @@
 		./ssh.nix
 		./samba.nix
 	];
-
-	overlays.KDE.enable = lib.mkDefault true;
 }
