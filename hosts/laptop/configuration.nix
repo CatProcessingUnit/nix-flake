@@ -1,8 +1,11 @@
 {config, pkgs, ...}:
 
 {
-   desktop.env = "KDE";
-   desktop.displayProtocol = "wayland";
+   desktop = {
+	env = "i3";
+	displayProtocol = "x11";
+	displayManager = "lightDM";
+   };
    boot.kernelPackages = pkgs.linuxPackages_zen;
    features.samba.enable = true;
    system.stateVersion = "26.05";
