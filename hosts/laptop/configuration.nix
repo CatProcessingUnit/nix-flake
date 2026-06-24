@@ -1,13 +1,9 @@
 {config, pkgs, ...}:
 
 {
-   desktop.env = "LXQt";
-   desktop.displayProtocol = "x11";
-   
-   features.ssh.enabled = true;
-   features.samba.enabled = true;
-
+   desktop.env = "KDE";
+   desktop.displayProtocol = "wayland";
    boot.kernelPackages = pkgs.linuxPackages_zen;
-
+   features.samba.enable = true;
    system.stateVersion = "26.05";
 }
