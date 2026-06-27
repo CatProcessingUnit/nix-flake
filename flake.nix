@@ -40,11 +40,21 @@
 			trusted-users = ["root" "@wheel"];
 		};
 		# declare hosts
-		nixosConfigurations = {	
-			nix-btw = myLib.mkHost {hostName = "nix-btw"; system = "x86_64-linux";};
-			laptop = myLib.mkHost {hostName = "laptop"; system = "x86_64-linux";};
-		};
+		#nixosConfigurations = {	
+		#	nix-btw = myLib.mkHost {hostName = "nix-btw"; system = "x86_64-linux";};
+		#	laptop = myLib.mkHost {hostName = "laptop"; system = "x86_64-linux";};
+		#};
 
+		nixosConfigurations = let
+			allHosts = myLib.getAllHosts;
+			entryToAttrs = name: {
+				inherit name;
+				value = myLib.mkHost {hostName = name; system = "x86_64-linux";};
+			};
+			hostAttrs = map entryToAttrs allHosts;
+			attrSet = builtins.listToAttrs hostAttrs;
+		in attrSet;
+		
 		# home manager configurations
 		homeConfigurations."test" = home-manager.lib.homeManagerConfiguration {	
 			pkgs = import nixpkgs {

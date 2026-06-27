@@ -13,6 +13,7 @@ let
    };
    exports = {
 	mkHost = (import ./mkHost.nix) flake;
+	getAllHosts = (import ./getAllHosts.nix) flake;
    };
 in
 exports
