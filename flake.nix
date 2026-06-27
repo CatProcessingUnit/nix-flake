@@ -16,9 +16,19 @@
   outputs = { self, nixpkgs, home-manager, ... }@inputs: 
 	let
 		system = "x86_64-linux";
-		myLib = import ./myLib { inherit self inputs; };
-		# directory for homeManager
-		homeDirectory = ./home;
+		
+		# stores all paths
+		# it makes changing the file layout faster
+		flakePaths = rec {
+			home = ./home; # directory for homeManager
+			hosts = ./hosts; # directory for host configurations
+			modules = ./modules;
+			users = modules + "/users";
+			features = modules + "/features";
+			systemSettings = modules + "/system";
+			desktop = modules + "/desktop";
+		};
+		myLib = import ./myLib { inherit self inputs flakePaths; };
 	in 
 	{
 		nix.settings = {
@@ -44,7 +54,7 @@
 
 			modules = [
 				#./home/test/home.nix
-				(homeDirectory + "/test/home.nix")
+				(flakePaths.home + "/test/home.nix")
 			];
 		};
   	};

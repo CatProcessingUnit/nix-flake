@@ -1,4 +1,4 @@
-flake@{self, lib, inputs, ...}:
+flake@{self, lib, inputs, flakePaths, ...}:
 
 let 
    mkHost = {
@@ -13,24 +13,19 @@ let
 			inherit inputs;
 			#inherit homeDirectory;
 		};
-		modules = [
+		modules = with flakePaths; [
 			{
-				#nixpkgs.config.allowUnfree = true;
 				nixpkgs.config.allowUnfree = true;
 				networking.hostName = hostName;
 			}
 
-			# host specific configuration
-			#(./. + "/hosts/${hostName}/configuration.nix")
-			#(./. + "/hosts/${hostName}/hardware-configuration.nix")
-			( ../. + "/hosts/${hostName}/configuration.nix")
-			( ../. + "/hosts/${hostName}/hardware-configuration.nix")
+			(hosts + "/${hostName}/configuration.nix")
+			(hosts + "/${hostName}/hardware-configuration.nix")
 
-			(../modules/features)
-			(../modules/users)
-			(../modules/system)
-			(../modules/desktop)
-			
+			features
+			users
+			systemSettings
+			desktop
 			# imports home-manager module 
 			#inputs.home-manager.nixosModules.default 
 			#{
