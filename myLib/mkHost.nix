@@ -11,6 +11,7 @@ let
 		inherit system;
 		specialArgs = {
 			inherit inputs;
+			inherit flakePaths;
 			#inherit homeDirectory;
 		};
 		modules = with flakePaths; [
@@ -27,13 +28,13 @@ let
 			systemSettings
 			desktop
 			# imports home-manager module 
-			#inputs.home-manager.nixosModules.default 
-			#{
-			#	home-manager = {
-			#		useGlobalPkgs = true;
-			#		useUserPackages = true;
-			#	};	
-			#}
+			inputs.home-manager.nixosModules.default 
+			{
+				home-manager = {
+					useGlobalPkgs = true;
+					useUserPackages = true;
+				};	
+			}
 		];
 	};
 in

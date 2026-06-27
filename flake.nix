@@ -53,19 +53,6 @@
 			};
 			hostAttrs = map entryToAttrs allHosts;
 			attrSet = builtins.listToAttrs hostAttrs;
-		in attrSet;
-		
-		# home manager configurations
-		homeConfigurations."test" = home-manager.lib.homeManagerConfiguration {	
-			pkgs = import nixpkgs {
-				inherit system;
-				config.allowUnfree = true;
-			};
-
-			modules = [
-				#./home/test/home.nix
-				(flakePaths.home + "/test/home.nix")
-			];
-		};
+		in attrSet;	
   	};
 }
