@@ -7,7 +7,6 @@
   desktop.env = "KDE";
   desktop.displayProtocol = "wayland";
   desktop.displayManager = "sddm";
-  overlays.KDE.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
   features.samba.enable = true;
   features.ssh.enable = true;
