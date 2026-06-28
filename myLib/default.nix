@@ -2,7 +2,7 @@
 
 let
    lib = inputs.nixpkgs.lib // inputs.home-manager.lib; # merge libs
-   myLib = (import ./default.nix) { inherit self inputs; }; # so the functions can call each other
+   myLib = (import ./default.nix) { inherit self inputs flakePaths; }; # so the functions can call each other
    flake = {
 	inherit
 		self
@@ -14,6 +14,7 @@ let
    exports = {
 	mkHost = (import ./mkHost.nix) flake;
 	getAllHosts = (import ./getAllHosts.nix) flake;
+	importAllFrom = (import ./importAllFrom.nix) flake;
    };
 in
 exports

@@ -1,4 +1,4 @@
-flake@{self, lib, inputs, flakePaths, ...}:
+flake@{self, lib, inputs, flakePaths, myLib, ...}:
 
 let 
    mkHost = {
@@ -8,10 +8,11 @@ let
 	lib.nixosSystem {
 		# system = "x86_64-linux";
 		# pass inputs to modules
-		inherit system;
+		inherit system;	
 		specialArgs = {
 			inherit inputs;
 			inherit flakePaths;
+			inherit myLib;
 			#inherit homeDirectory;
 		};
 		modules = with flakePaths; [

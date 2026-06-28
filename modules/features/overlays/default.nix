@@ -1,7 +1,7 @@
 {config, lib, pkgs, ...}:
 
 {
-	imports = [
-		./KDE.nix		
-	];
+	#imports = [
+	#	./KDE.nix		
+	#];
 }

@@ -1,4 +1,4 @@
-{config, lib, pkgs, ...}:
+{config, lib, pkgs, myLib, ...}:
 
 {
 	options.desktop = {
@@ -19,14 +19,15 @@
 		};
 	};
 	
-	imports = [
-		./displayProtocol
-		./displayManagers
-		./KDE.nix
-		./xfce.nix
-		./hyprland.nix
-		./LXQt.nix
-		./i3.nix
-	];
+	#imports = [
+	#	./displayProtocol
+	#	./displayManagers
+	#	./KDE.nix
+	#	./xfce.nix
+	#	./hyprland.nix
+	#	./LXQt.nix
+	#	./i3.nix
+	#];
+	imports = myLib.importAllFrom ./.;
 }
 

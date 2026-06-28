@@ -1,9 +1,9 @@
-{config, lib, pkgs, flakePaths, ...}:
-
+{config, lib, pkgs, myLib, flakePaths, ...}:
 {
-  imports = [
-    ./users/test.nix
-  ];
+  #imports = [
+  #  ./users/test.nix
+  #];
+  imports = myLib.importAllFrom ./users; 
 
   users.test.enable = lib.mkDefault true;
 

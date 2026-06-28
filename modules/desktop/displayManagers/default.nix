@@ -1,8 +1,9 @@
-{config, pkgs, lib, ...}:
+{config, pkgs, myLib, ...}:
 
 {
-   imports = [
-	./sddm.nix
-	./lightDM.nix
-   ];
+   #imports = [
+#	./sddm.nix
+#	./lightDM.nix
+   #];
+   imports = myLib.importAllFrom ./.;
 }
