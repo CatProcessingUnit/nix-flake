@@ -1,7 +1,7 @@
-{pkgs, ...}:
+{pkgs, userName, ...}:
 
 {
-   users.users."test" = {
+   users.users.${userName} = {
 	isNormalUser = true;
 	description = "test";
 	extraGroups = [ "networkmanager" "wheel" "samba" ];	

@@ -11,7 +11,7 @@
 				};
 				# need to inherit pkgs
 				# or else it won't work
-				config = lib.mkIf config.users.${userName}.enable (import (./users + "/${fileName}") { inherit pkgs; });
+				config = lib.mkIf config.users.${userName}.enable (import (./users + "/${fileName}") { inherit pkgs userName; });
 			}
 	 ) 
   	(builtins.attrNames (builtins.readDir ./users));
