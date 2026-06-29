@@ -1,9 +1,20 @@
 {config, lib, pkgs, myLib, flakePaths, ...}:
 {
-  #imports = [
-  #  ./users/test.nix
-  #];
-  imports = myLib.importAllFrom ./users; 
+  # merge this later with the function below
+  imports = map (fileName: 
+  		let
+  			userName = lib.removeSuffix ".nix" fileName;
+		in
+			{
+				options = {
+					users.${userName}.enable = lib.mkEnableOption "enable user: ${userName}";
+				};
+				# need to inherit pkgs
+				# or else it won't work
+				config = lib.mkIf config.users.${userName}.enable (import (./users + "/${fileName}") { inherit pkgs; });
+			}
+	 ) 
+  	(builtins.attrNames (builtins.readDir ./users));
 
   users.test.enable = lib.mkDefault true;
 
