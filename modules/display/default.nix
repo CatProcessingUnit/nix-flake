@@ -28,6 +28,9 @@
 	#	./LXQt.nix
 	#	./i3.nix
 	#];
-	imports = myLib.importAllFrom ./.;
+	imports = 
+		myLib.importAllFrom ./gui ++
+		myLib.importAllFrom ./displayProtocol ++
+		myLib.importAllFrom ./displayManagers;
 }
 
