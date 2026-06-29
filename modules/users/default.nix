@@ -16,6 +16,7 @@
   	removeFileExtension = name: lib.strings.removeSuffix ".nix" name;
 	getHomeFolderPath = username: (flakePaths.home + "/${username}");
 	hasHomeFolder = username: builtins.pathExists (getHomeFolderPath username);
+	
 	isModule = name: type: 
 		let
 			nameLength = builtins.stringLength name;
@@ -27,12 +28,7 @@
 	userDirectoryContent = builtins.readDir ./users;
 	userModules = builtins.attrNames (lib.filterAttrs isModule userDirectoryContent);
 	userNames = map removeFileExtension userModules;
-	usersWithHomeModules = lib.foldr 
-		# if user has home folder then
-		# return acc with it's added username
-		# else just return acc
-		(userName: acc: if (hasHomeFolder userName) then acc ++ [userName] else acc)
-		[] userNames;
+	usersWithHomeModules = lib.filter hasHomeFolder userNames;
 	attrList = map (username: {name = username; value = import ((getHomeFolderPath username) + "/home.nix");}) usersWithHomeModules;
 	attrSet = builtins.listToAttrs attrList;
   in attrSet;
