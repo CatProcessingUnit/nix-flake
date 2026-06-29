@@ -13,7 +13,7 @@
   
   # it removes the need for adding the entries manually
   home-manager.users = let
-  	removeFileExtension = name: lib.strings.removeSuffix name ".nix";
+  	removeFileExtension = name: lib.strings.removeSuffix ".nix" name;
 	getHomeFolderPath = username: (flakePaths.home + "/${username}");
 	hasHomeFolder = username: builtins.pathExists (getHomeFolderPath username);
 	isModule = name: type: 

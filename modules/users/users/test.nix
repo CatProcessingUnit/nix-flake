@@ -14,6 +14,5 @@
     		shell = pkgs.zsh;
         	hashedPassword = "$6$fAmtURGSCwlOV5kU$euyOlyYgYwmmYRQlYLFIImHLrz2e4oSknxGAXAfsj0fGddhmQN8Pa6W3RU6YSasqZp7yNrfSt6VqILyX/E1CG0";
 	};
-	home-manager.users."test" = import (flakePaths.home + "/test/home.nix");
-   };
+  };
 }
