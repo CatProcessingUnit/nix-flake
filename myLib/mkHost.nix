@@ -27,7 +27,7 @@ let
 			features
 			users
 			systemSettings
-			desktop
+			display
 			# imports home-manager module 
 			inputs.home-manager.nixosModules.default 
 			{

@@ -26,7 +26,7 @@
 			users = modules + "/users";
 			features = modules + "/features";
 			systemSettings = modules + "/system";
-			desktop = modules + "/desktop";
+			display = modules + "/display";
 		};
 		myLib = import ./myLib { inherit self inputs flakePaths; };
 	in 
