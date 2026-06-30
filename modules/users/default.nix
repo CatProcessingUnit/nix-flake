@@ -1,46 +1,25 @@
 {config, lib, pkgs, myLib, flakePaths, ...}:
-{
-  # merge this later with the function below
-  imports = map (fileName: 
-  		let
-  			userName = lib.removeSuffix ".nix" fileName;
-		in
-			{
-				options = {
-					users.${userName}.enable = lib.mkEnableOption "enable user: ${userName}";
-				};
-				# need to inherit pkgs
-				# or else it won't work
-				config = lib.mkIf config.users.${userName}.enable (import (./users + "/${fileName}") { inherit pkgs userName; });
-			}
-	 ) 
-  	(builtins.attrNames (builtins.readDir ./users));
 
-  users.test.enable = lib.mkDefault true;
-
-  # create home-manager module entries for existing users
-  # by reading the contents of users directory
-  # ignore if user doesn't have a home-manager module
+let
+   getUserHomeModule = username: flakePaths.home + "/${username}/home.nix";
+   hasHomeModule = username: builtins.pathExists (getUserHomeModule username);
+   isModule = name: type:
+   	if (type == "regular") && (lib.strings.hasSuffix ".nix" name) then
+		true
+	else
+		builtins.trace "${name} is not a module, skipping" false;
+   mkUserEntry = username: {
+	options = {
+		users.${username}.enable = lib.mkEnableOption "Enable user ${username}";
+	};
+	config = import (./users + "/${username}.nix") { inherit pkgs username; };
+   };
   
-  # it removes the need for adding the entries manually
-  home-manager.users = let
-  	removeFileExtension = name: lib.strings.removeSuffix ".nix" name;
-	getHomeFolderPath = username: (flakePaths.home + "/${username}");
-	hasHomeFolder = username: builtins.pathExists (getHomeFolderPath username);
-	
-	isModule = name: type: 
-		let
-			nameLength = builtins.stringLength name;
-		in
-			if (type == "regular") && ((builtins.substring (nameLength - 4) 4 name) == ".nix") then true
-			else builtins.trace "${name} is not a module" false;
-
-
-	userDirectoryContent = builtins.readDir ./users;
-	userModules = builtins.attrNames (lib.filterAttrs isModule userDirectoryContent);
-	userNames = map removeFileExtension userModules;
-	usersWithHomeModules = lib.filter hasHomeFolder userNames;
-	attrList = map (username: {name = username; value = import ((getHomeFolderPath username) + "/home.nix");}) usersWithHomeModules;
-	attrSet = builtins.listToAttrs attrList;
-  in attrSet;
+   userModules = lib.filterAttrs (k: v: isModule k v) (builtins.readDir ./users);
+   usernames = map (entry: lib.strings.removeSuffix ".nix" entry) (builtins.attrNames userModules);
+   usersWithHomeModules = builtins.filter (username: (hasHomeModule username)) usernames;
+in {
+   imports = map (username: (mkUserEntry username)) usernames;
+   home-manager.users = builtins.listToAttrs
+   	(map (username: {name = username; value = import (getUserHomeModule username);}) usersWithHomeModules);
 }
