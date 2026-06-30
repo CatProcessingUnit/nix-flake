@@ -10,6 +10,7 @@
   boot.kernelPackages = pkgs.linuxPackages_zen;
   features.samba.enable = true;
   features.ssh.enable = true;
+  features.gaming.enable = true;
   # Enable networking
   networking = {
 	networkmanager = {
