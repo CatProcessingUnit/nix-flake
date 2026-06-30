@@ -1,3 +1,7 @@
+# import all users and create
+# options for enabling them
+# also import all existing home configurations
+
 {config, lib, pkgs, myLib, flakePaths, ...}:
 
 let
