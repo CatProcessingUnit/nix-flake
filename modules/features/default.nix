@@ -6,5 +6,8 @@
 	#	./samba.nix
 	#	./zram.nix
 	#];
-	imports = myLib.importAllFrom ./.;
+	imports = 
+		myLib.importAllFrom ./. ++
+		myLib.importAllFrom ./overlays ++
+		myLib.importAllFrom ./drivers;
 }
