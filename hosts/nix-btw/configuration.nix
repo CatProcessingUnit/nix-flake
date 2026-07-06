@@ -11,6 +11,7 @@
   features.samba.enable = true;
   features.ssh.enable = true;
   features.gaming.enable = true;
+  users.jac.enable = true;
   # Enable networking
   networking = {
 	networkmanager = {
