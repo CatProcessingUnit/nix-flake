@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, flakePaths, ... }:
 {
   desktop.env = "KDE";
   desktop.displayProtocol = "wayland";
@@ -21,6 +21,7 @@
 			desktop = 9;
 		};
 	};
+	image = (flakePaths.home + "/wallpapers/gruvbox-nix1.png");
   };
   # Enable networking
   networking = {
