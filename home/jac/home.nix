@@ -74,15 +74,9 @@
 		#	nixd
 		#];
 
-		plugins = with pkgs.vimPlugins; [
-			gruvbox
-		];
+		plugins = with pkgs.vimPlugins; [];
 
 		initLua = ''
-			vim.cmd([[
-				colorscheme gruvbox
-			]])
-
 			local flake_expr = "builtins.getFlake (toString ./.)"	
 
 			vim.lsp.config("nixd", {
