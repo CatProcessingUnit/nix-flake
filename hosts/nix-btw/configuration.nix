@@ -15,6 +15,12 @@
   stylix = {
 	enable = true;
 	base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-medium.yaml";
+	fonts = {
+		sizes = {
+			applications = 11;
+			desktop = 9;
+		};
+	};
   };
   # Enable networking
   networking = {
