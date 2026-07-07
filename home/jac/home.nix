@@ -119,13 +119,13 @@
 			jnoortheen.nix-ide
 			oderwat.indent-rainbow
 			vscodevim.vim
-			jdinhlife.gruvbox
+			#jdinhlife.gruvbox
 		];
 
 		profiles.default.userSettings = {
 			"telemetry.telemtryLevel" = "off";
 			
-			"workbench.colorTheme" = "Gruvbox Dark Medium";
+			#"workbench.colorTheme" = "Gruvbox Dark Medium";
 		};
 	};
   };

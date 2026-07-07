@@ -20,7 +20,7 @@ let
 				nixpkgs.config.allowUnfree = true;
 				networking.hostName = hostName;
 			}
-
+			
 			(hosts + "/${hostName}/configuration.nix")
 			(hosts + "/${hostName}/hardware-configuration.nix")
 
@@ -28,6 +28,8 @@ let
 			users
 			systemSettings
 			display
+
+			inputs.stylix.nixosModules.stylix
 			# imports home-manager module 
 			inputs.home-manager.nixosModules.default 
 			{
