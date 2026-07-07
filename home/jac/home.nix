@@ -70,9 +70,9 @@
 		viAlias = true;
 		vimAlias = true;
 		
-		#extraPackages = with pkgs; [
-		#	nixd
-		#];
+		extraPackages = with pkgs; [
+			nixd
+		];
 
 		plugins = with pkgs.vimPlugins; [];
 
