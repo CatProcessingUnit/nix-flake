@@ -25,5 +25,18 @@ let
 in {
    imports = map (username: (mkUserEntry username)) usernames;
    home-manager.users = builtins.listToAttrs
-   	(map (username: {name = username; value = import (getUserHomeModule username);}) usersWithHomeModules);
+   	(map (username: 
+		{
+			name = username; 
+			value = {
+				imports = [(getUserHomeModule username)];
+				config = {
+					home = {
+						inherit username;
+						homeDirectory = config.users.users.${username}.home;
+					};
+				};
+			};
+		}) 
+		usersWithHomeModules);
 }
