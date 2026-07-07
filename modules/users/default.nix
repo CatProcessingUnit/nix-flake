@@ -5,7 +5,7 @@
 {config, lib, pkgs, myLib, flakePaths, ...}:
 
 let
-   getUserHomeModule = username: flakePaths.home + "/${username}/home.nix";
+   getUserHomeModule = username: flakePaths.home + "/users/${username}/home.nix";
    hasHomeModule = username: builtins.pathExists (getUserHomeModule username);
    isModule = name: type:
    	if (type == "regular") && (lib.strings.hasSuffix ".nix" name) then
