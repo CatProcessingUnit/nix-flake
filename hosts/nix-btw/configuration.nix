@@ -11,8 +11,11 @@
   features.samba.enable = true;
   features.ssh.enable = true;
   features.gaming.enable = true;
-  features.stylix.enable = true;
   users.jac.enable = true;
+  stylix = {
+	enable = true;
+	base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+  };
   # Enable networking
   networking = {
 	networkmanager = {
