@@ -58,6 +58,9 @@
 	firefox = {
 		enable = true;
 	};
+	fastfetch = {
+		enable = true;
+	};
 	neovim = {
 		enable = true;
 		defaultEditor = true;
