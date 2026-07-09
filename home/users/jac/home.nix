@@ -120,6 +120,14 @@
 			#"workbench.colorTheme" = "Gruvbox Dark Medium";
 		};
 	};
+	mangohud = {
+		enable = true;
+		settings = {
+			gpu_stats = true;
+			cpu_stats = true;
+			fps = true;
+		};
+	};
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
