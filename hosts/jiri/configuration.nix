@@ -18,7 +18,7 @@
    stylix = {
 	enable = true;
 	base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-medium.yaml";
-	image = (flakePaths.home + "/wallpapers/gruvbox-nix1.png");
+	image = (flakePaths.home + "/wallpapers/gruvbox-nix2.png");
 	fonts = {
 		sizes = {
 			applications = 11;
