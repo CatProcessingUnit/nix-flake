@@ -1,4 +1,4 @@
-{ self, config, pkgs, ... }:
+{ lib, pkgs, ... }:
 
 { 
   # This value determines the Home Manager release that your configuration is
@@ -122,10 +122,19 @@
 	};
 	mangohud = {
 		enable = true;
-		settings = {
+		settings = {	
 			gpu_stats = true;
 			cpu_stats = true;
 			fps = true;
+		};
+	};
+  };
+  stylix = {
+	targets = {
+		mangohud = {
+			opacity.override = {
+				popups = 0;
+			};
 		};
 	};
   };
