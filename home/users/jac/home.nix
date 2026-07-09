@@ -51,6 +51,9 @@
   programs = {
   	kitty = {
 		enable = true;
+		extraConfig = ''
+			shell_integration enabled
+		'';
 	};
 	firefox = {
 		enable = true;
