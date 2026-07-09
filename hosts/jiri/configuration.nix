@@ -1,7 +1,9 @@
 {pkgs, flakePaths, ...}:
 
 {
+   system.stateVersion = "26.11";
    boot.kernelPackages = pkgs.linuxPackages_zen;
+
    users = {
 	jac.enable = true;
    };
