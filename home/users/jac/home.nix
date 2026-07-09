@@ -51,9 +51,6 @@
   programs = {
   	kitty = {
 		enable = true;
-		#themeFile = "Campbell";
-		#theme = "Gruvbox Material Dark Medium";
-		themeFile = "GruvboxMaterialDarkMedium";
 	};
 	firefox = {
 		enable = true;
