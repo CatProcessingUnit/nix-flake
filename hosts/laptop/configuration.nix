@@ -4,7 +4,7 @@
    desktop = {
 	env = "i3";
 	displayProtocol = "x11";
-	displayManager = "lightDM";
+	displayManager = "ly";
    };
    users = {
 	jac.enable = true;
