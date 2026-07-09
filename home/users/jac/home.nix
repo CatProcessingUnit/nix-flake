@@ -49,6 +49,9 @@
 	};
   };
   programs = {
+  	prismlauncher = {
+		enable = true;
+	};
   	kitty = {
 		enable = true;
 		extraConfig = ''
