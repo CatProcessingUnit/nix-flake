@@ -128,6 +128,9 @@
 			fps = true;
 		};
 	};
+	btop = {
+		enable = true;
+	};
   };
   stylix = {
 	targets = {
