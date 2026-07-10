@@ -134,6 +134,9 @@
 	btop = {
 		enable = true;
 	};
+	discord = {
+		enable = true;
+	};
   };
   stylix = {
 	targets = {
