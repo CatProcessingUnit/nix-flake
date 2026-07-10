@@ -19,18 +19,15 @@
 		};
 	};
 	
-	#imports = [
-	#	./displayProtocol
-	#	./displayManagers
-	#	./KDE.nix
-	#	./xfce.nix
-	#	./hyprland.nix
-	#	./LXQt.nix
-	#	./i3.nix
-	#];
+	config.xdg.portal = {
+		enable = true;
+		config.common.default = "*";
+	};
+
 	imports = 
 		myLib.importAllFrom ./gui ++
 		myLib.importAllFrom ./displayProtocol ++
 		myLib.importAllFrom ./displayManagers;
+	
 }
 

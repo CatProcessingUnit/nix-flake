@@ -12,6 +12,7 @@
 					else "plasmax11";
 			};
 		};
+		xdg.portal.extraPortals = with pkgs; [ kdePackages.xdg-desktop-portal-kde ];
 		environment.plasma6.excludePackages = with pkgs.kdePackages; [
 			kate
 			konsole
