@@ -10,9 +10,9 @@
 			enable = true;
 			remotePlay.openFirewall = true;
 			dedicatedServer.openFirewall = true;
-			extraCompatPackages = with pkgs; [
-				proton-ge-bin
-			];
+			#extraCompatPackages = with pkgs; [
+				#proton-ge-bin
+			#];
 		};
 		gamescope = {
 			enable = true;
@@ -22,5 +22,8 @@
 			enable = true;
 		};
 	};
+	environment.systemPackages = with pkgs; [
+		protonup-qt
+	];
    };
 }
