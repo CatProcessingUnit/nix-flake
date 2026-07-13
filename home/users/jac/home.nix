@@ -138,6 +138,7 @@
 		enable = true;
 		settings = {
 			SKIP_HOST_UPDATE = true;
+			IS_MAXIMIZED = true;
 		};
 	};
   };
