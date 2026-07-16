@@ -9,7 +9,6 @@
 
 	services = {
 		displayManager.defaultSession = "hyprland";
-		hyprpolkitagent.enable = true; # Authentication agent
 	};
    };
 }
