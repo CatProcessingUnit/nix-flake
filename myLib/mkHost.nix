@@ -32,13 +32,16 @@ let
 			inputs.stylix.nixosModules.stylix
 			# imports home-manager module 
 			inputs.home-manager.nixosModules.default 
-			{
+			({config, ...}: {
 				home-manager = {
 					useGlobalPkgs = true;
 					useUserPackages = true;
 					backupFileExtension = "backup";
+					extraSpecialArgs = {
+						myFlake = config.myFlake;
+					};
 				};	
-			}
+			})
 		];
 	};
 in
