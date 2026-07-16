@@ -39,6 +39,7 @@ let
 					backupFileExtension = "backup";
 					extraSpecialArgs = {
 						myFlake = config.myFlake;
+						inherit myLib;
 					};
 				};	
 			})
