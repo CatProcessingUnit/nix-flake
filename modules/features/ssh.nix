@@ -1,11 +1,11 @@
 {config, lib, pkgs, ...}:
 
 {
-	options = {
-		features.ssh.enable =
+	options.myFlake.features.ssh = {
+		enable =
 			lib.mkEnableOption "enables OpenSSH server";
 	};
-	config = lib.mkIf config.features.ssh.enable {	
+	config = lib.mkIf config.myFlake.features.ssh.enable {	
 		services.openssh = {
 				enable = true;
 				openFirewall = true;

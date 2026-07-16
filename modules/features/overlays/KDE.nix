@@ -1,11 +1,11 @@
 {config, pkgs, lib, ...}:
 
 {	
-	options = {
-		overlays.KDE.enable = lib.mkEnableOption "enable KDE performance optimization overlay";
+	options.myFlake.overlays.KDE = {
+		enable = lib.mkEnableOption "enable KDE performance optimization overlay";
 	};
 	# fixes performance issues
-	config = lib.mkIf config.overlays.KDE.enable {
+	config = lib.mkIf config.myFlake.overlays.KDE.enable {
 		nixpkgs.overlays = lib.singleton (final: prev: {
 		    kdePackages = prev.kdePackages // {
 		      plasma-workspace = let

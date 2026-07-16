@@ -1,10 +1,10 @@
 {pkgs, config, lib, ...}:
 
 {
-   options = {
-	features.gaming.enable = lib.mkEnableOption "enable gaming";
+   options.myFlake.features.gaming = {
+	enable = lib.mkEnableOption "enable gaming";
    };
-   config = lib.mkIf config.features.gaming.enable {
+   config = lib.mkIf config.myFlake.features.gaming.enable {
 	programs = {
 		steam = {
 			enable = true;

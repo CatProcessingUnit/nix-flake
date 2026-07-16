@@ -1,7 +1,7 @@
 {config, lib, ...}:
 
 {
-   config = lib.mkIf (config.desktop.displayManager == "lightDM") {
+   config = lib.mkIf (config.myFlake.desktop.displayManager == "lightDM") {
 	   services.xserver.displayManager.lightdm = {
 		enable = true;
 	   };

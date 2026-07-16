@@ -14,7 +14,7 @@ let
 		builtins.trace "${name} is not a module, skipping" false;
    mkUserEntry = username: {
 	options = {
-		users.${username}.enable = lib.mkEnableOption "Enable user ${username}";
+		myFlake.users.${username}.enable = lib.mkEnableOption "Enable user ${username}";
 	};
 	config = import (./users + "/${username}.nix") { inherit pkgs username; };
    };

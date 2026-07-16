@@ -3,11 +3,11 @@
 {config, pkgs, lib, ...}:
 
 {
-	config = lib.mkIf (config.desktop.env == "KDE") {	
+	config = lib.mkIf (config.myFlake.desktop.env == "KDE") {	
 		services = {
 			desktopManager.plasma6.enable=true;
 			displayManager = {
-				defaultSession = if (config.desktop.displayProtocol == "wayland")
+				defaultSession = if (config.myFlake.desktop.displayProtocol == "wayland")
 					then "plasma"
 					else "plasmax11";
 			};

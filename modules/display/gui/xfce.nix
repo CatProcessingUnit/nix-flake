@@ -1,10 +1,10 @@
 {config, pkgs, lib, ...}:
 	
 {
-	config = lib.mkIf (config.desktop.env == "xfce") {
+	config = lib.mkIf (config.myFlake.desktop.env == "xfce") {
 		assertions = [
 			{
-				assertion = config.desktop.displayProtocol == "x11";
+				assertion = config.myFlake.desktop.displayProtocol == "x11";
 				message = "only x11 is supported";
 			}
 		];

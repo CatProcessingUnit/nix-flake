@@ -3,17 +3,18 @@
 {
    system.stateVersion = "26.11";
    boot.kernelPackages = pkgs.linuxPackages_zen;
-
-   users = {
-	jac.enable = true;
-   };
-   desktop = {
-	env = "KDE";
-	displayProtocol = "wayland";
-	displayManager = "ly";
-   };
-   features = {
-	gaming.enable = true;
+   myFlake = {
+	   users = {
+		jac.enable = true;
+	   };
+	   desktop = {
+		env = "KDE";
+		displayProtocol = "wayland";
+		displayManager = "ly";
+	   };
+	   features = {
+		gaming.enable = true;
+	   };
    };
    stylix = {
 	enable = true;

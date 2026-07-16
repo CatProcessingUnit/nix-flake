@@ -1,7 +1,7 @@
 {config, lib, pkgs, myLib, ...}:
 
 {
-	options.desktop = {
+	options.myFlake.desktop = {
 		env = lib.mkOption {
 			type = lib.types.nullOr lib.types.str;
 			description = "select DE";
