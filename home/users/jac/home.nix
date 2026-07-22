@@ -1,4 +1,4 @@
-{ myLib, lib, pkgs, ... }:
+{ myLib, lib, pkgs, myFlake, ... }:
 
 {
   imports = myLib.importAllFrom ./modules;
@@ -66,6 +66,11 @@
 	};
 	firefox = {
 		enable = true;
+		package = myLib.wrapFirejailBinary {
+			inherit pkgs lib myFlake;
+			package = pkgs.firefox;
+			profile = "${pkgs.firejail}/etc/firejail/firefox.profile";
+		};
 	};
 	fastfetch = {
 		enable = true;

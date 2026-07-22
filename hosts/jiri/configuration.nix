@@ -14,6 +14,7 @@
 	   };
 	   features = {
 		gaming.enable = true;
+		firejail.enable = true;
 	   };
    };
    stylix = {
