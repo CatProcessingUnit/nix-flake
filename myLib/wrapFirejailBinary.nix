@@ -42,8 +42,10 @@ let
 		if (!myFlake.features.firejail.enable) then
 			builtins.warn "wrapFirejailBinary: not wrapping ${packageName}, firejail is disabled" package
 		else
-			package.overrideAttrs (old: {
-				nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.makeWrapper ];
-				buildCommand = old.buildCommand + script;
-			});
+			if ((package.buildCommand or "") != "") then 
+				package.overrideAttrs (old: {
+					nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.makeWrapper ];
+					buildCommand = old.buildCommand + script;
+				})
+			else builtins.warn "wrapFirejailBinary: not wrapping ${packageName}, packages not using buildCommand are not supported at this moment" package;
 in wrapFirejailBinary
