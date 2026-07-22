@@ -1,7 +1,7 @@
 {config, lib, ...}:
 
 let
-   cfg = config.myflake.features.firejail;
+   cfg = config.myFlake.features.firejail;
 in {
    options.myFlake.features.firejail = {
 	enable = lib.mkEnableOption "enable firejail";
