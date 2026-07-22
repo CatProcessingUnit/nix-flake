@@ -15,6 +15,7 @@ let
 	mkHost = (import ./mkHost.nix) flake;
 	getAllHosts = (import ./getAllHosts.nix) flake;
 	importAllFrom = (import ./importAllFrom.nix) flake;
+	wrapFirejailBinary = (import ./wrapFirejailBinary.nix) flake;
    };
 in
 exports
