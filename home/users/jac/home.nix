@@ -66,11 +66,6 @@
 	};
 	firefox = {
 		enable = true;
-		package = myLib.wrapFirejailBinary {
-			inherit pkgs lib myFlake;
-			package = pkgs.firefox;
-			profile = "${pkgs.firejail}/etc/firejail/firefox.profile";
-		};
 	};
 	fastfetch = {
 		enable = true;
@@ -147,11 +142,6 @@
 	};
 	discord = {
 		enable = true;
-		package = myLib.wrapFirejailBinary {
-			inherit pkgs lib myFlake;
-			package = pkgs.discord;
-			profile = "${pkgs.firejail}/etc/firejail/discord.profile";
-		};
 		settings = {
 			SKIP_HOST_UPDATE = true;
 			IS_MAXIMIZED = true;
