@@ -8,7 +8,7 @@
 		jac.enable = true;
 	   };
 	   desktop = {
-		env = "KDE";
+		env = "plasma";
 		displayProtocol = "wayland";
 		displayManager = "ly";
 	   };
