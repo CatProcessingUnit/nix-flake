@@ -9,5 +9,5 @@
   #  ./networking.nix
   #  ./packages.nix
   #];
-  imports = myLib.importAllFrom ./.;
+  imports = myLib.importAllFrom ./. {};
 }

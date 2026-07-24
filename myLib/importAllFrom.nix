@@ -12,7 +12,12 @@
 {lib, ...}:
 
 let
-   importAllFrom = path: let
+   importAllFrom = path: {
+   	# pass full file name and file name without .nix extension
+	# to the nix module (in the moduleInfo attrset)
+	# requires another argument header at the top in the module
+	inheritModuleInfo ? false,
+   }: let
 	checkFile = file: 
 		if file.type == "regular" then
 			((lib.strings.hasSuffix ".nix" file.name) && (file.name != "default.nix"))
@@ -25,6 +30,19 @@ let
 		(k: v: {name = k; type = v;}) 
 		(builtins.readDir path);
 	validFiles = builtins.filter checkFile pathContentList;
-	paths = map (file: (path + "/${file.name}")) validFiles;
-   in paths;
+	modules = map 
+		(file:
+			let
+				filePath = (path + "/${file.name}");
+			in if !inheritModuleInfo then filePath
+			else (import filePath {
+					moduleInfo = {
+						fileName = file.name;
+						name = lib.strings.removeSuffix ".nix" file.name;
+					};
+				}
+			)
+		) 
+		validFiles;
+   in modules;
 in importAllFrom

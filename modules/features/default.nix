@@ -7,7 +7,7 @@
 	#	./zram.nix
 	#];
 	imports = 
-		myLib.importAllFrom ./. ++
-		myLib.importAllFrom ./overlays ++
-		myLib.importAllFrom ./drivers;
+		myLib.importAllFrom ./. {} ++
+		myLib.importAllFrom ./overlays {} ++
+		myLib.importAllFrom ./drivers {};
 }
