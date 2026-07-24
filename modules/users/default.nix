@@ -1,12 +1,9 @@
 # import all users and create
 # options for enabling them
-# also import all existing home configurations
 
 {config, lib, pkgs, myLib, flakePaths, ...}:
 
 let
-   getUserHomeModule = username: flakePaths.home + "/users/${username}/home.nix";
-   hasHomeModule = username: builtins.pathExists (getUserHomeModule username);
    isModule = name: type:
    	if (type == "regular") && (lib.strings.hasSuffix ".nix" name) then
 		true
@@ -21,22 +18,6 @@ let
   
    userModules = lib.filterAttrs (k: v: isModule k v) (builtins.readDir ./users);
    usernames = map (entry: lib.strings.removeSuffix ".nix" entry) (builtins.attrNames userModules);
-   usersWithHomeModules = builtins.filter (username: (hasHomeModule username)) usernames;
 in {
    imports = map (username: (mkUserEntry username)) usernames;
-   home-manager.users = builtins.listToAttrs
-   	(map (username: 
-		{
-			name = username; 
-			value = {
-				imports = [(getUserHomeModule username)];
-				config = {
-					home = {
-						inherit username;
-						homeDirectory = config.users.users.${username}.home;
-					};
-				};
-			};
-		}) 
-		usersWithHomeModules);
 }

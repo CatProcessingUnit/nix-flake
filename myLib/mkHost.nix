@@ -28,6 +28,7 @@ let
 			users
 			systemSettings
 			display
+			home
 
 			inputs.stylix.nixosModules.stylix
 			# imports home-manager module 
