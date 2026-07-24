@@ -1,9 +1,8 @@
-# kde with wayland
-
+{moduleInfo, ...}:
 {config, pkgs, lib, ...}:
 
 {
-	config = lib.mkIf (config.myFlake.desktop.env == "KDE") {	
+	config = lib.mkIf (config.myFlake.desktop.env == "${moduleInfo.name}") {	
 		services = {
 			desktopManager.plasma6.enable=true;
 			displayManager = {

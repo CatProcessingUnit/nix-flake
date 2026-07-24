@@ -1,7 +1,8 @@
+{moduleInfo, ...}:
 {config, pkgs, lib, ...}:
 	
 {
-	config = lib.mkIf (config.myFlake.desktop.env == "xfce") {
+	config = lib.mkIf (config.myFlake.desktop.env == "${moduleInfo.name}") {
 		assertions = [
 			{
 				assertion = config.myFlake.desktop.displayProtocol == "x11";

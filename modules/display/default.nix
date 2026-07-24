@@ -31,9 +31,9 @@ in {
 	};
 
 	imports = 
-		myLib.importAllFrom ./gui {} ++
+		myLib.importAllFrom ./gui { inheritModuleInfo = true; } ++
 		myLib.importAllFrom ./displayProtocol { inheritModuleInfo = true; } ++
-		myLib.importAllFrom ./displayManagers {};
+		myLib.importAllFrom ./displayManagers { inheritModuleInfo = true; };
 	
 }
 

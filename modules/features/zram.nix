@@ -1,7 +1,8 @@
+{moduleInfo, ...}:
 {config, pkgs, lib, ...}:
 
 {
-   options.myFlake.features.zram = {
+   options.myFlake.features.${moduleInfo.name} = {
 	enable = lib.mkEnableOption "Enable zram";
 	memoryPercent = lib.mkOption {
 		type = lib.types.int;
@@ -9,7 +10,7 @@
 		default = 50;
 	};
    };
-   config = lib.mkIf config.myFlake.features.zram.enable {
+   config = lib.mkIf config.myFlake.features.${moduleInfo.name}.enable {
 	zramSwap = {
 		enable = true;
 		algorithm = "zstd";

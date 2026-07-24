@@ -1,10 +1,11 @@
+{moduleInfo, ...}:
 {config, lib, pkgs, ...}:
 
 {
-  options.myFlake.features.samba = {
+  options.myFlake.features.${moduleInfo.name} = {
     enable = lib.mkEnableOption "Enable samba server";
   };
-  config = lib.mkIf config.myFlake.features.samba.enable {
+  config = lib.mkIf config.myFlake.features.${moduleInfo.name}.enable {
     environment.systemPackages = with pkgs; [
 	gvfs
     ];

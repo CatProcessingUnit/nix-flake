@@ -1,9 +1,10 @@
+{moduleInfo, ...}:
 {config, lib, ...}:
 
 let
-   cfg = config.myFlake.features.firejail;
+   cfg = config.myFlake.features.${moduleInfo.name};
 in {
-   options.myFlake.features.firejail = {
+   options.myFlake.features.${moduleInfo.name} = {
 	enable = lib.mkEnableOption "enable firejail";
    };
    config = lib.mkIf cfg.enable {

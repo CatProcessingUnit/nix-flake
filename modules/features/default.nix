@@ -1,13 +1,7 @@
-{config, pkgs, lib, myLib, ...}:
+{myLib, ...}:
 {
-	#imports = [
-	#	./overlays
-	#	./ssh.nix
-	#	./samba.nix
-	#	./zram.nix
-	#];
 	imports = 
-		myLib.importAllFrom ./. {} ++
+		myLib.importAllFrom ./. { inheritModuleInfo = true; } ++
 		myLib.importAllFrom ./overlays {} ++
 		myLib.importAllFrom ./drivers {};
 }
