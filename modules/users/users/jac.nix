@@ -1,4 +1,5 @@
-{username, pkgs, ...}:
+{username, ...}:
+{pkgs, ...}:
 
 {
    users.users.${username} = {

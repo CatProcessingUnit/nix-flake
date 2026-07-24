@@ -13,7 +13,7 @@ let
 	options = {
 		myFlake.users.${username}.enable = lib.mkEnableOption "Enable user ${username}";
 	};
-	config = import (./users + "/${username}.nix") { inherit pkgs username; };
+	imports = [ (import (./users + "/${username}.nix") { inherit username; }) ];
    };
   
    userModules = lib.filterAttrs (k: v: isModule k v) (builtins.readDir ./users);
