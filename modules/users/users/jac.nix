@@ -5,7 +5,7 @@
    config = lib.mkIf (cfg.enable) {
 	   users.users.${username} = {
 		isNormalUser = true;
-		extraGroups = [ "networkmanager" "wheel" "samba" ];
+		extraGroups = [ "networkmanager" "wheel" "samba" "gamemode" ];
 		shell = pkgs.zsh;
 		initialPassword = "";
 	   };
