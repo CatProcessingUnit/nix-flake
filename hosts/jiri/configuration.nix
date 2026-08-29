@@ -1,4 +1,4 @@
-{pkgs, flakePaths, ...}:
+{pkgs, flakePaths, config, ...}:
 
 {
    system.stateVersion = "26.11";
@@ -34,6 +34,7 @@
 	nvidia = {
 		open = true; # use open kernel modules
 		modesetting.enable = true; # for wayland
+		package = config.boot.kernelPackages.nvidiaPackages.new_feature;
 	};
    };
    services.xserver.videoDrivers = [ "nvidia" ]; 
