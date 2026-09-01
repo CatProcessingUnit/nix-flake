@@ -11,6 +11,10 @@ for k,v in pairs(pkgs) do
 	end
 end
 
+hl.animation({
+	leaf = "windows",
+	enabled = false
+})
 
 hl.config({
 	general = {
