@@ -11,5 +11,11 @@
 	services = {
 		displayManager.defaultSession = "hyprland";
 	};
+
+	# for nvidia gpus
+	environment.sessionVariables = lib.mkIf (builtins.elem "nvidia" config.services.xserver.videoDrivers) {	
+		"LIBVA_DRIVER_NAME" = "nvidia";
+		"__GLX_VENDOR_LIBRARY_NAME" = "nvidia";
+	};
    };
 }
