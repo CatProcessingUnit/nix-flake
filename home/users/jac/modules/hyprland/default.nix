@@ -28,6 +28,9 @@
 			rofi = {
 				enable = true;
 			};
+			waybar = {
+				enable = true;
+			};
 		};
 		stylix = {
 			targets.hyprland.hyprpaper.enable = true;

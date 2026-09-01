@@ -35,6 +35,7 @@ local binds = {
 }
 
 hl.on("hyprland.start", function()
+	hl.exec_cmd("waybar")
 	hl.exec_cmd(pkgs["hyprpaper"])
 	hl.exec_cmd(pkgs["dbus-update-activation-environment"] .. " --systemd DISPLAY HYPRLAND_INSTANCE_SIGNATURE WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE && systemctl --user stop hyprland-session.target && systemctl --user start hyprland-session.target")
 end)
