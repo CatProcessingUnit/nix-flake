@@ -2,7 +2,7 @@
 {config, pkgs, lib, ...}:
 
 let
-	cfg = config.myFlake.features.swap.${moduleInfo};
+	cfg = config.myFlake.features.swap.${moduleInfo.name};
 in {
    options.myFlake.features.swap.${moduleInfo.name} = {
 	memoryPercent = lib.mkOption {
