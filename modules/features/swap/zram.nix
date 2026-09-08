@@ -1,20 +1,21 @@
 {moduleInfo, ...}:
 {config, pkgs, lib, ...}:
 
-{
-   options.myFlake.features.${moduleInfo.name} = {
-	enable = lib.mkEnableOption "Enable zram";
+let
+	cfg = config.myFlake.features.swap.${moduleInfo};
+in {
+   options.myFlake.features.swap.${moduleInfo.name} = {
 	memoryPercent = lib.mkOption {
 		type = lib.types.int;
 		description = "zram size (%)";
 		default = 50;
 	};
    };
-   config = lib.mkIf config.myFlake.features.${moduleInfo.name}.enable {
+   config = lib.mkIf cfg.enable {
 	zramSwap = {
 		enable = true;
 		algorithm = "zstd";
-		memoryPercent = config.myFlake.features.zram.memoryPercent;
+		memoryPercent = cfg.memoryPercent;
 		priority = 10;
 	};
    };
