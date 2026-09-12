@@ -18,7 +18,8 @@ in {
 			};
 		};	
 	in {
-		zram = sharedOptions "zram";	
+		zram = sharedOptions "zram";
+		zswap = sharedOptions "zswap";
 		fileSwap = {
 			enable = lib.mkEnableOption "enable file swap";
 			size = lib.mkOption {
