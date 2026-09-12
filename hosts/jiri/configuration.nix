@@ -14,6 +14,16 @@
 	   };
 	   features = {
 		gaming.enable = true;
+		swap = {
+			fileSwap = {
+				enable = true;
+				size = 8;
+			};
+			zswap = {
+				enable = true;
+				algorithm = "zstd";
+			};
+		};
 	   };
    };
    stylix = {
