@@ -1,13 +1,10 @@
-{username, cfg, ...}:
-{pkgs, lib, ...}:
+{pkgs, ...}:
 
-{
-   config = lib.mkIf (cfg.enable) {
-	   users.users.${username} = {
+let
+	data = {
 		isNormalUser = true;
-		extraGroups = [ "networkmanager" "wheel" "samba" "gamemode" ];
+		extraGroups = [ "networkmanager" "samba" "gamemode" ];
 		shell = pkgs.zsh;
 		initialPassword = "";
-	   };
-   };
-}
+	};
+in data

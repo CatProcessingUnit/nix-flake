@@ -5,7 +5,10 @@
    boot.kernelPackages = pkgs.linuxPackages_zen;
    myFlake = {
 	   users = {
-		jac.enable = true;
+		jac = {
+			enable = true;
+			isAdmin = true;
+		};
 	   };
 	   desktop = {
 		env = "plasma";
