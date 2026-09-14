@@ -13,7 +13,6 @@ let
 			inherit inputs;
 			inherit flakePaths;
 			inherit myLib;
-			pkgs-stable = inputs.nixpkgs-stable.legacyPackages.${system};
 			#inherit homeDirectory;
 		};
 		modules = with flakePaths; [
@@ -41,7 +40,6 @@ let
 					backupFileExtension = "backup";
 					extraSpecialArgs = {
 						myFlake = config.myFlake;
-						pkgs-stable = inputs.nixpkgs-stable.legacyPackages.${system};
 						inherit myLib;
 					};
 				};	
