@@ -1,6 +1,9 @@
-{...}:
+{pkgs, ...}:
 
 {
+   environment.systemPackages = with pkgs; [
+	bubblewrap
+   ];
    security = {
 	sudo = {
 		extraConfig = # sh
