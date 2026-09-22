@@ -31,8 +31,8 @@
    };
    stylix = {
 	enable = true;
-	base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-	image = (flakePaths.home + "/wallpapers/railroad-cat.png");
+	base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-medium.yaml";
+	image = (flakePaths.home + "/wallpapers/mountain-cat.jpg");
 	fonts = {
 		sizes = {
 			applications = 11;
