@@ -26,5 +26,9 @@
 	environment.systemPackages = with pkgs; [
 		protonup-qt
 	];
+	# for PROTON_ENABLE_NTSYNC
+	boot.kernelModules = [
+		"ntsync"
+	];
    };
 }
