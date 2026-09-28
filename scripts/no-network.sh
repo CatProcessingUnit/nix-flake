@@ -13,7 +13,7 @@ uid=$(id -u)
 # create no-network slice if it doesn't exist
 # so 'nft add rule' won't fail
 systemctl list-unit-files --user "no-network-keeper.service" \
-&& systemd-run \
+|| systemd-run \
 	--user \
 	--slice=app-nonetwork.slice \
 	--unit "no-network-keeper" \
