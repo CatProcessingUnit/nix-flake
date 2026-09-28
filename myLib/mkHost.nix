@@ -23,7 +23,8 @@ let
 			
 			(hosts + "/${hostName}/configuration.nix")
 			(hosts + "/${hostName}/hardware-configuration.nix")
-
+			
+			../scripts
 			features
 			users
 			systemSettings
