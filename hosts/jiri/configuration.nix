@@ -2,7 +2,12 @@
 
 {
    system.stateVersion = "26.11";
-   boot.kernelPackages = pkgs.linuxPackages_zen;
+   boot = {
+   	kernelPackages = pkgs.linuxPackages_zen;
+	kernelParams = [
+		"pcie_aspm=off" # fixes system log spam
+	];
+   };
    myFlake = {
 	   users = {
 		jac = {
