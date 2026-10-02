@@ -18,7 +18,7 @@ hl.animation({
 
 hl.config({
 	general = {
-		layout = "scroll"
+		layout = "scrolling"
 	},
 	misc = {
 		disable_splash_rendering = true,
