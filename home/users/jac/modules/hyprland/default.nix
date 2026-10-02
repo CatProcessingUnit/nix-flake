@@ -2,10 +2,14 @@
 
 {
 	config = lib.mkIf (myFlake.desktop.env == "hyprland" ){
+		fonts.fontconfig.enable = true;
 		home = {
 			packages = with pkgs; [ 
 				hyprpolkitagent
 				hyprshutdown
+				font-awesome
+				nerd-fonts.fira-code
+				nerd-fonts.symbols-only
 			];
 			file = {
 				".config/hypr/hyprland.lua" = {
