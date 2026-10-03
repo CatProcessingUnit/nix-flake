@@ -79,6 +79,7 @@ bwrap \
 	--ro-bind-try /sys/devices/system/cpu /sys/devices/system/cpu \
 	--ro-bind-try /sys/class /sys/class \
 	--ro-bind-try /sys/dev/char /sys/dev/char \
+	--ro-bind-try "$HOME/.config/MangoHud" "$HOME/.config/MangoHud" \
 	--dev-bind-try /dev/dri /dev/dri \
 	"${args[@]}" \
 	-- \
