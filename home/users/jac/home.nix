@@ -140,6 +140,7 @@
 			fps = true;
 			fps_limit = 164;
 			no_display = true;
+			display_server = true;
 		};
 	};
 	btop = {
