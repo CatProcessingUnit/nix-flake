@@ -138,6 +138,8 @@
 			gpu_stats = true;
 			cpu_stats = true;
 			fps = true;
+			fps_limit = 164;
+			no_display = true;
 		};
 	};
 	btop = {
