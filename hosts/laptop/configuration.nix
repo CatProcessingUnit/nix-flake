@@ -8,14 +8,28 @@
 		displayManager = "ly";
 	   };
 	   users = {
-		jac.enable = true;
+		jac = {
+			enable = true;
+			isAdmin = true;
+		};
 	   };
-	   features.zram = {
-		enable = true;
-		memoryPercent = 100;
+	   features = {
+	   	swap = {
+			fileSwap = {
+				enable = true;
+				size = 8;
+			};
+			zswap = {
+				enable = true;
+				algorithm = "zstd";
+			};
+	   	};
 	   };
    };
+   stylix = {
+   	enable = true;
+	base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+   };
    boot.kernelPackages = pkgs.linuxPackages_zen;
-   features.samba.enable = true;
    system.stateVersion = "26.05";
 }
