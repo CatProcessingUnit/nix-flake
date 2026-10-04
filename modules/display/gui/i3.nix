@@ -9,6 +9,7 @@
 			message = "only x11 is supported on i3";
 		}
 	];
+	xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
 	services = {
 		xserver = {
 			windowManager.i3 = {
