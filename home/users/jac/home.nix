@@ -68,7 +68,6 @@
 	};
 	firefox = {
 		enable = true;
-		package = pkgs.firefox-beta;
 	};
 	fastfetch = {
 		enable = true;
