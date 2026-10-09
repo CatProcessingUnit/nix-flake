@@ -57,6 +57,11 @@
   	zsh = {
 		enable = true;
 	};
+	yazi = {
+		enable = true;
+		enableBashIntegration = true;
+		enableZshIntegration = true;
+	};
   	prismlauncher = {
 		enable = true;
 	};
