@@ -21,6 +21,7 @@
 		displayManager = "ly";
 	   };
 	   features = {
+	   	virtualisation.enable = true;
 		gaming.enable = true;
 		swap = {
 			fileSwap = {
