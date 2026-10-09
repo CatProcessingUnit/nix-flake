@@ -146,6 +146,7 @@
 			fps_limit = 144;
 			no_display = true;
 			display_server = true;
+			winesync = true;
 		};
 	};
 	btop = {
