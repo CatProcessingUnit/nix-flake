@@ -138,7 +138,8 @@
 	};
 	mangohud = {
 		enable = true;
-		settings = {	
+		settings = {
+			font_size = lib.mkForce 17;
 			gpu_stats = true;
 			cpu_stats = true;
 			fps = true;
