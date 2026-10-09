@@ -12,6 +12,9 @@
 			};
 		};
 		xdg.portal.extraPortals = with pkgs; [ kdePackages.xdg-desktop-portal-kde ];
+		
+		# remove plasma bloat
+		programs.kde-pim.enable = false;
 		environment.plasma6.excludePackages = with pkgs.kdePackages; [
 			kate
 			konsole
