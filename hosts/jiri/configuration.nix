@@ -23,10 +23,6 @@
 	   features = {
 	   	virtualisation = {
 			enable = true;
-			bridge = {
-				enable = true;
-				allowedBridges = [ "enp6s0" ];
-			};
 		};
 		gaming.enable = true;
 		swap = {
