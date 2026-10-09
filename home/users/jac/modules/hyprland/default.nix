@@ -8,8 +8,6 @@
 				hyprpolkitagent
 				hyprshutdown
 				font-awesome
-				nerd-fonts.fira-code
-				nerd-fonts.symbols-only
 			];
 			file = {
 				".config/hypr/hyprland.lua" = {
