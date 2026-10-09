@@ -18,7 +18,8 @@ hl.animation({
 
 hl.config({
 	general = {
-		layout = "scrolling"
+		layout = "scrolling",
+		allow_tearing = true
 	},
 	misc = {
 		disable_splash_rendering = true,
