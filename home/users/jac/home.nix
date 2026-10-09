@@ -130,11 +130,6 @@
 			#jdinhlife.gruvbox
 		];
 
-		profiles.default.userSettings = {
-			"telemetry.telemtryLevel" = "off";
-			
-			#"workbench.colorTheme" = "Gruvbox Dark Medium";
-		};
 	};
 	mangohud = {
 		enable = true;
