@@ -12,6 +12,11 @@ in {
 		virtualisation = {
 			libvirtd = {
 				enable = true;
+				# TPM emulation
+				qemu = {
+					swtpm.enable = true;
+				};
+
 			};
 		};
 		programs = {
