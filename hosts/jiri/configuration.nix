@@ -8,10 +8,11 @@
 		"pcie_aspm=off" # fixes system log spam
 	];
    };
-   services.scx = {
+   services.scx-loader = {
    	enable = true;
-	scheduler = "scx_lavd";
-	extraArgs = [ "--autopilot" ];
+	config = {
+		default_sched = "scx_lavd";
+	};
    };
    myFlake = {
 	   users = {
