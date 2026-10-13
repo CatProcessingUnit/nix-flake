@@ -8,6 +8,11 @@
 		"pcie_aspm=off" # fixes system log spam
 	];
    };
+   services.scx = {
+   	enable = true;
+	scheduler = "scx_lavd";
+	extraArgs = [ "--autopilot" ];
+   };
    myFlake = {
 	   users = {
 		jac = {
