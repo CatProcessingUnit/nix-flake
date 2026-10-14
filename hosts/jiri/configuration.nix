@@ -38,7 +38,7 @@
 			};
 			zswap = {
 				enable = true;
-				algorithm = "zstd";
+				algorithm = "lz4";
 			};
 		};
 	   };
