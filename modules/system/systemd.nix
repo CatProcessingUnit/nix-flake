@@ -2,7 +2,13 @@
 
 {
 	systemd = {
-		coredump.enable = false;
+		coredump = {
+			enable = true; # required for the options below
+			settings.Coredump = {
+				Storage = "none";
+				ProcessSizeMax = "0";
+			};
+		};
 	};
 	services = {
 		journald = {
