@@ -122,7 +122,10 @@
 						keyword_length = 1
 					},
 					{ name = 'luasnip' },
-				})
+				}),
+				performance = {
+					max_view_entries = 10, -- limit autocomplete to 10 entries
+				},
 			})
 
 			vim.lsp.config("nixd", {
@@ -134,6 +137,12 @@
 					nixd = {
 						nixpkgs = {
 							expr = string.format("import (%s.inputs.nixpkgs) {}", flake_expr),	
+						},
+
+						options = {
+							nixos = {
+								expr = string.format("(%s).nixosConfigurations.%s.options", flake_expr, vim.uv.os_gethostname()),
+							}
 						},
 						formatting = {
 							command = { "alejandra" },
