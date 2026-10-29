@@ -88,15 +88,48 @@
 			nixd
 		];
 
-		plugins = with pkgs.vimPlugins; [];
+		plugins = with pkgs.vimPlugins; [
+			nvim-cmp
+			cmp-nvim-lsp
+			luasnip
+			cmp_luasnip
+		];		
 
 		initLua = ''
-			local flake_expr = "builtins.getFlake (toString ./.)"	
+			local cmp = require('cmp')
+			local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+			local flake_expr = "builtins.getFlake (toString ./.)"
+
+			cmp.setup({
+				snippet = {
+					expand = function(args)
+						require('luasnip').lsp_expand(args.body)
+					end,
+				},
+				window = {
+					completion = cmp.config.window.bordered()
+				},
+				mapping = cmp.mapping.preset.insert({
+					      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+					      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+					      ['<C-Space>'] = cmp.mapping.complete(),
+					      ['<C-e>'] = cmp.mapping.abort(),
+					      ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+				}),
+				sources = cmp.config.sources({
+					{ 
+						name = 'nvim_lsp',
+						keyword_length = 1
+					},
+					{ name = 'luasnip' },
+				})
+			})
 
 			vim.lsp.config("nixd", {
 				cmd = { "nixd" },
 				filetypes = { "nix" },
 				root_markers = { "flake.nix", ".git" },
+				capabilities = lsp_capabilities,
 				settings = {
 					nixd = {
 						nixpkgs = {
