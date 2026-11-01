@@ -148,9 +148,18 @@
 							command = { "alejandra" },
 						},
 					},
-				},
+				}
 			})
+
+			vim.lsp.config("clangd", {
+				cmd = { "clangd" },
+				root_markers = { ".clangd", "compile_commands.json" },
+				filetypes = { "c" },
+				capabilities = lsp_capabilities,
+			})
+
 			vim.lsp.enable("nixd");
+			vim.lsp.enable("clangd");
 		'';
 
 	};
