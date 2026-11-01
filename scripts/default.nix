@@ -6,5 +6,6 @@ in {
 	environment.systemPackages = with pkgs; [
 		(import ./no-network { inherit pkgs; })
 		(import ./prism-sandbox { inherit pkgs; })
+		(import ./no-network-ctl { inherit pkgs; })
 	];
 }
