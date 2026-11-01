@@ -89,18 +89,23 @@ int main(int argc, char** argv) {
 
 	// check capabilities
 	cap_t caps = cap_get_proc();
-	cap_flag_value_t on;
+	cap_flag_value_t proc_has_cap_net_admin;
 	if (caps == NULL) {
 		puts("cap_get_proc() fail");
 		return 1;
 	};
-	if (cap_get_flag(caps, CAP_NET_ADMIN, CAP_PERMITTED, &on) == -1) {
+	if (cap_get_flag(caps, CAP_NET_ADMIN, CAP_PERMITTED, &proc_has_cap_net_admin) == -1) {
+		puts("cap_get_flag() failed");
+		return 1;
+	};
+
+	if (proc_has_cap_net_admin == CAP_CLEAR) {
 		puts(
 			"Operation not permitted\n"
 			"CAP_NET_ADMIN is required"
 		);
 		return 1;
-	};
+	}
 
 	// enable/disable
 	if (argv[1] == NULL) {
