@@ -12,7 +12,7 @@ in {
 		group = "root";
 	};
 	environment.systemPackages = with pkgs; [
-		(import ./no-network { inherit pkgs; })
+		(import ./no-network-bash { inherit pkgs; })
 		(import ./prism-sandbox { inherit pkgs; })
 	];
 }
