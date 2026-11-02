@@ -11,7 +11,10 @@
 			in {
 				name = username;
 				value = {
-					imports = [ (./users + "/${username}/home.nix") ];
+					imports = [ 
+						(./users + "/${username}/home.nix") 
+						./modules/services.nix
+					];
 					config.home = {
 						inherit username;
 						homeDirectory = config.users.users.${username}.home;

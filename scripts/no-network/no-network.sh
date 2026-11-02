@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-no-network-ctl start && systemd-run \
+# add nftables rules with no-network-ctl start
+systemd-run \
 	--user \
 	--slice="app-nonetwork" \
 	--scope \
