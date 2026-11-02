@@ -209,7 +209,20 @@ bool check(json_object* current_rules) {
 }
 
 void stop() {
-	not_implemented();
+	json_object* current_rules = get_nft_rules_by_comment(get_slice_comment());
+	json_object* entry = NULL;
+	for (int i = 0; true; i++) {
+		entry = json_object_array_get_idx(current_rules, i);
+		if (entry == NULL) {
+			break;
+		}
+		const char* comment = json_object_get_string(json_object_object_get(entry, "comment"));
+		char* target_comment = get_slice_comment();
+		if (comment != NULL && strcmp(comment, target_comment) == 0) {
+			int handle = json_object_get_int(json_object_object_get(entry, "handle"));
+			delete_rule(handle);
+		}
+	}
 }
 
 void start() {
