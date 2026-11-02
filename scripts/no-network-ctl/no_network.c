@@ -205,6 +205,10 @@ void start() {
 }
 
 int main(int argc, char** argv) {
+	if (getuid() == 0) {
+		puts("this program doesn't work when running as root");
+		return 1;
+	}
 	// nftables ctx setup
 	json_ctx = nft_ctx_new(NFT_CTX_DEFAULT);
 	if (json_ctx == NULL) {
