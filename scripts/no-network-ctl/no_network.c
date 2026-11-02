@@ -170,7 +170,6 @@ void delete_invalid_rules(json_object* rules) {
 				int handle = json_object_get_int(json_object_object_get(entry, "handle"));
 				printf("rule with handle %d is created by this user\n", handle);
 				const char* slice = NULL;
-				json_object* expr = json_object_object_get(entry, "expr");
 				slice = get_rule_slice(entry);
 				char* target_slice = get_slice_path();
 				printf("target_slice: %s\n slice: %s\n", target_slice, slice);
