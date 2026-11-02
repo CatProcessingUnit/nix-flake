@@ -113,6 +113,41 @@ void delete_rule(int handle) {
 	free(cmd);
 }
 
+const char* get_rule_slice(json_object* nft_rule) {
+	json_object* expr = json_object_object_get(nft_rule, "expr");
+	if (expr != NULL && json_object_is_type(expr, json_type_array)) {
+		json_object* expr_data = NULL;
+		for (int x = 0; true; x++) {
+			expr_data = json_object_array_get_idx(expr, x);
+			if (expr_data == NULL) {
+				break;
+			};
+			json_object* match;
+			json_object* left;
+			json_object* socket;
+			json_object* right;
+			json_object* key;
+			// check if its cgroupsv2
+			if (
+				json_object_object_get_ex(expr_data, "match", &match) &&
+				json_object_object_get_ex(match, "right", &right) &&
+				json_object_object_get_ex(match, "left", &left) &&
+				json_object_object_get_ex(left, "socket", &socket) &&
+				json_object_object_get_ex(socket, "key", &key) &&
+
+				json_object_is_type(key, json_type_string) &&
+				json_object_is_type(right, json_type_string) &&
+
+				strcmp(json_object_get_string(key), "cgroupsv2")) 
+			{
+				puts("slice ok");
+				return json_object_get_string(right);
+			}
+		}
+	}
+	return NULL;	
+}
+
 // iterate through rules matching get_slice_comment()
 // and delete rules not matching get_slice_path()
 // because nft rules using cgroups break, when the cgroup stops existing
@@ -133,36 +168,7 @@ void delete_invalid_rules(json_object* rules) {
 				printf("rule with handle %d is created by this user\n", handle);
 				const char* slice = NULL;
 				json_object* expr = json_object_object_get(entry, "expr");
-				if (expr != NULL && json_object_is_type(expr, json_type_array)) {
-					json_object* expr_data = NULL;
-					for (int x = 0; true; x++) {
-						expr_data = json_object_array_get_idx(expr, x);
-						if (expr_data == NULL) {
-							break;
-						};
-						json_object* match;
-						json_object* left;
-						json_object* socket;
-						json_object* right;
-						json_object* key;
-						// check if its cgroupsv2
-						if (
-							json_object_object_get_ex(expr_data, "match", &match) &&
-							json_object_object_get_ex(match, "right", &right) &&
-							json_object_object_get_ex(match, "left", &left) &&
-							json_object_object_get_ex(left, "socket", &socket) &&
-							json_object_object_get_ex(socket, "key", &key) &&
-
-							json_object_is_type(key, json_type_string) &&
-							json_object_is_type(right, json_type_string) &&
-
-							strcmp(json_object_get_string(key), "cgroupsv2")) 
-						{
-							puts("slice ok");
-							slice =	json_object_get_string(right);
-						}
-					}
-				}
+				slice = get_rule_slice(entry);
 				char* target_slice = get_slice_path();
 				printf("target_slice: %s\n slice: %s\n", target_slice, slice);
 				if (slice != NULL && strcmp(slice, target_slice) != 0 && handle != 0) {
@@ -175,8 +181,29 @@ void delete_invalid_rules(json_object* rules) {
 	}
 };
 
-bool check() {
-	not_implemented();
+bool check(json_object* current_rules) {
+	json_object* entry = NULL;
+	for (int i = 0; true; i++) {
+		entry = json_object_array_get_idx(current_rules, i);
+		if (entry == NULL) {
+			break;
+		};
+		const char* comment = json_object_get_string(json_object_object_get(entry, "comment"));
+		char* target_comment = get_slice_comment();
+		puts("d1");
+		if (strcmp(comment, target_comment) == 0) {
+			puts("d2");
+			const char* slice = get_rule_slice(entry);
+			char* target_slice = get_slice_path();
+			if (slice != NULL && strcmp(slice, target_slice) == 0) {
+				free(target_slice);
+				return true;
+			}
+			free(target_slice);
+		}
+		free(target_comment);
+	}
+	return false;
 }
 
 void stop() {
@@ -192,16 +219,20 @@ void start() {
 	char* rule = NULL;
 	char* path = get_slice_path();
 	char* comment = get_slice_comment();
-	bool already_started = false;
-	// spawn a keeper process for the slice, if one doesn't already exist
-	// because rules can only be added for existing slices
-	system("systemctl list-unit-files --user \"no-network-keeper.service\" > /dev/null || systemd-run --user --slice=app-nonetwork.slice --unit \"no-network-keeper\" sleep infinity > /dev/null");
-	asprintf(&rule, "add rule inet filter output socket cgroupv2 level 5 \"%s\" oifname != \"lo\" drop comment \"%s\"", path, comment);
-	nft_run_cmd_from_buffer(empty_ctx, rule);
+	bool already_started = check(current_rules);
+	if (!already_started) {
+		// spawn a keeper process for the slice, if one doesn't already exist
+		// because rules can only be added for existing slices
+		system("systemctl list-unit-files --user \"no-network-keeper.service\" > /dev/null || systemd-run --user --slice=app-nonetwork.slice --unit \"no-network-keeper\" sleep infinity > /dev/null");
+		asprintf(&rule, "add rule inet filter output socket cgroupv2 level 5 \"%s\" oifname != \"lo\" drop comment \"%s\"", path, comment);
+		nft_run_cmd_from_buffer(empty_ctx, rule);
+		puts("asdasdasdasd");
+	} else {
+		puts("already running");
+	}
 	free(rule);
-	free(path);
 	free(comment);
-	puts("asdasdasdasd");
+	free(path);
 }
 
 int main(int argc, char** argv) {
