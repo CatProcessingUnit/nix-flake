@@ -1,3 +1,6 @@
+// todo:
+// cleanup code
+
 #include <iso646.h>
 #include <json-c/json_types.h>
 #include <stdio.h>
@@ -210,9 +213,6 @@ void stop() {
 	not_implemented();
 }
 
-// todo:
-// check if a rule already exists
-// because it keeps creating new rules every launch!
 void start() {
 	json_object* current_rules = get_nft_rules_by_comment(get_slice_comment());
 	delete_invalid_rules(current_rules);
