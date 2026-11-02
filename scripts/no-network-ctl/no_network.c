@@ -1,5 +1,6 @@
 // todo:
-// cleanup code
+// rewrite this later
+// this code is crap
 
 #include <iso646.h>
 #include <json-c/json_types.h>
@@ -63,7 +64,6 @@ json_object* get_nft_rules_by_comment(char* comment) {
 		puts("buffer returned wrong result");
 		exit(1);
 	};
-	puts("A1");
 	int n = json_object_array_length(json_array);
 	json_object* result = json_object_new_array();
 	if (result == NULL) {
@@ -71,40 +71,27 @@ json_object* get_nft_rules_by_comment(char* comment) {
 		exit(1);
 	}
 	int result_size = 0;
-	puts("A2");
 	for (int i = 0; i < n; i++) {
-		puts("AAA123123");
 		json_object* entry = json_object_array_get_idx(json_array, i);
-		puts("A3");
 		if (entry == NULL) {
 			puts("failed to get entry");
 			exit(1);
 		};
 		json_object* rule = json_object_object_get(entry, "rule");
-		puts("A4");
 		if (rule != NULL) {
 			json_object* rule_comment = json_object_object_get(rule, "comment");
-			puts("A5");
-			printf("rule_comment is not null: %d\n", rule_comment != NULL);
-			printf("rule_comment value: %s\n", json_object_get_string(rule_comment));
-			printf("comment value: %s\n", comment);
-			printf("rule_comment equals comment: %d\n", json_object_get_string(rule_comment) == comment);
 			// use strcmp
 			// because these are pointers!
 			if (rule_comment != NULL && strcmp(json_object_get_string(rule_comment), comment) == 0) {
-				puts("A6");
 				result_size += 1;
 				json_object_array_insert_idx(result, result_size - 1, rule);
-				puts("A7");
 			};
 		}
 	};
 	
 	free(json_output);
 	nft_ctx_unbuffer_output(json_ctx);
-	
-	printf("rules are null: %d\n", result == NULL);
-
+		
 	return result;
 }
 
@@ -143,7 +130,6 @@ const char* get_rule_slice(json_object* nft_rule) {
 
 				strcmp(json_object_get_string(key), "cgroupsv2")) 
 			{
-				puts("slice ok");
 				return json_object_get_string(right);
 			}
 		}
@@ -168,11 +154,9 @@ void delete_invalid_rules(json_object* rules) {
 			char* target_comment = get_slice_comment();
 			if (strcmp(comment, target_comment) == 0) {
 				int handle = json_object_get_int(json_object_object_get(entry, "handle"));
-				printf("rule with handle %d is created by this user\n", handle);
 				const char* slice = NULL;
 				slice = get_rule_slice(entry);
 				char* target_slice = get_slice_path();
-				printf("target_slice: %s\n slice: %s\n", target_slice, slice);
 				if (slice != NULL && strcmp(slice, target_slice) != 0 && handle != 0) {
 					delete_rule(handle);
 				}
@@ -192,9 +176,7 @@ bool check(json_object* current_rules) {
 		};
 		const char* comment = json_object_get_string(json_object_object_get(entry, "comment"));
 		char* target_comment = get_slice_comment();
-		puts("d1");
 		if (strcmp(comment, target_comment) == 0) {
-			puts("d2");
 			const char* slice = get_rule_slice(entry);
 			char* target_slice = get_slice_path();
 			if (slice != NULL && strcmp(slice, target_slice) == 0) {
@@ -238,7 +220,7 @@ void start() {
 		system("systemctl list-unit-files --user \"no-network-keeper.service\" > /dev/null || systemd-run --user --slice=app-nonetwork.slice --unit \"no-network-keeper\" sleep infinity > /dev/null");
 		asprintf(&rule, "add rule inet filter output socket cgroupv2 level 5 \"%s\" oifname != \"lo\" drop comment \"%s\"", path, comment);
 		nft_run_cmd_from_buffer(empty_ctx, rule);
-		puts("asdasdasdasd");
+		puts("added nftables rules");
 	} else {
 		puts("already running");
 	}
