@@ -1,14 +1,35 @@
 {moduleInfo, ...}:
 {pkgs, config, lib, ...}:
 
-{
+let
+	cfg = config.myFlake.features.${moduleInfo.name};
+in {
    options.myFlake.features.${moduleInfo.name} = {
 	enable = lib.mkEnableOption "enable gaming";
+	steam = {
+		isolateHome = lib.mkOption {
+			type = lib.types.bool;
+			default = true;
+			description = "mounts fake home inside steam's bwrap sandbox";
+		};
+	};
    };
-   config = lib.mkIf config.myFlake.features.${moduleInfo.name}.enable {
+   config = lib.mkIf cfg.enable {
 	programs = {
 		steam = {
 			enable = true;
+			package = let
+					steamHomeName = "steam-home";
+				in lib.mkIf (cfg.steam.isolateHome)
+					(pkgs.steam.override {
+						extraBwrapArgs = [
+							"--bind $HOME/${steamHomeName} $HOME"
+							"--bind $HOME/.local/share/Steam $HOME/.local/share/Steam"
+							"--bind $HOME/.steam $HOME/.steam"
+							"--ro-bind-try $HOME/.config/fontconfig $HOME/.config/fontconfig"
+						];
+					});
+
 			remotePlay.openFirewall = true;
 			dedicatedServer.openFirewall = true;
 			#extraCompatPackages = with pkgs; [
