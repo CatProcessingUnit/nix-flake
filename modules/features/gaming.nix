@@ -26,7 +26,9 @@ in {
 							"--bind $HOME/${steamHomeName} $HOME"
 							"--bind $HOME/.local/share/Steam $HOME/.local/share/Steam"
 							"--bind $HOME/.steam $HOME/.steam"
+
 							"--ro-bind-try $HOME/.config/fontconfig $HOME/.config/fontconfig"
+							"--ro-bind-try $HOME/.config/MangoHud $HOME/.config/MangoHud"
 						];
 					});
 
