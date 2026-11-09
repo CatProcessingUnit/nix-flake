@@ -157,9 +157,17 @@
 				filetypes = { "c" },
 				capabilities = lsp_capabilities,
 			})
+			
+			vim.lsp.config("rust_analyzer", {
+				cmd = { "rust-analyzer" },
+				filetypes = { "rust", "rs" },
+				root_markers = { "Cargo.toml", ".git" },
+				capabilities = lsp_capabilities,
+			})
 
 			vim.lsp.enable("nixd");
 			vim.lsp.enable("clangd");
+			vim.lsp.enable("rust_analyzer");
 
 			vim.diagnostic.config({
 				virtual_text = false,
