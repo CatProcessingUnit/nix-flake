@@ -136,14 +136,19 @@
 				settings = {
 					nixd = {
 						nixpkgs = {
-							expr = string.format("import (%s.inputs.nixpkgs) {}", flake_expr),	
+							expr = string.format("import ((%s).inputs.nixpkgs) {}", flake_expr),
 						},
 
 						options = {
 							nixos = {
 								expr = string.format("(%s).nixosConfigurations.%s.options", flake_expr, vim.uv.os_gethostname()),
-							}
+							},
+
+							[ "home-manager" ] = {
+								expr = string.format("(%s).nixosConfigurations.%s.options.home-manager.users.type.getSubOptions []", flake_expr, vim.uv.os_gethostname()),
+							},
 						},
+
 						formatting = {
 							command = { "alejandra" },
 						},
