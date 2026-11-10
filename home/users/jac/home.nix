@@ -32,7 +32,19 @@
   programs = {
   	zsh = {
 		enable = true;
-
+	
+		plugins = let
+			# loads a plugin from nixpkgs
+			mkPlugin = pluginName:
+				{
+					name = pluginName;
+					src = pkgs.${pluginName};
+					file = "share/${pluginName}/${pluginName}.plugin.zsh";
+				};
+		in [
+			(mkPlugin "zsh-autosuggestions")
+		];
+		
 		# hide username and only show path
 		# and make it colored
 		initContent = let
