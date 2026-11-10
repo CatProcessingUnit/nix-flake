@@ -32,6 +32,11 @@
      krita
      devenv
      libreoffice-qt
+
+     # not using programs.discord because
+     # discord sometimes destroys the settings.json symlink
+     # and it breaks the home-manager activation during rebuild
+     discord
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -217,13 +222,6 @@
 	};
 	btop = {
 		enable = true;
-	};
-	discord = {
-		enable = true;
-		settings = {
-			SKIP_HOST_UPDATE = true;
-			IS_MAXIMIZED = true;
-		};
 	};
   };
   stylix = {
