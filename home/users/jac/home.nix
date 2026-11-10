@@ -1,4 +1,4 @@
-{ myLib, lib, pkgs, myFlake, ... }:
+{ myLib, lib, pkgs, myFlake, config, ... }:
 
 {
   imports = myLib.importAllFrom ./modules {};
@@ -32,6 +32,14 @@
   programs = {
   	zsh = {
 		enable = true;
+
+		# hide username and only show path
+		# and make it colored
+		initContent = let
+			color1 = config.lib.stylix.colors.base09;
+		in ''
+			export PROMPT="%F{#${color1}}%~ %# %f"
+		'';
 	};
 	yazi = {
 		enable = true;
