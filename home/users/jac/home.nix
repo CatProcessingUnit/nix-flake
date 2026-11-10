@@ -36,9 +36,9 @@
 		# hide username and only show path
 		# and make it colored
 		initContent = let
-			color1 = config.lib.stylix.colors.base09;
+			c = config.lib.stylix.colors;
 		in ''
-			export PROMPT="%F{#${color1}}%~ %# %f"
+			export PROMPT="%F{#${c.base09}}%~ %f%F{#${c.base0D}}%#%f "
 		'';
 	};
 	yazi = {
