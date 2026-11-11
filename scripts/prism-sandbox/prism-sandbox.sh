@@ -7,6 +7,10 @@ set -x
 args=()
 library_write=1
 
+usage() {
+	echo ""
+}
+
 if [[ -n "$WAYLAND_DISPLAY" ]]; then
 	args+=(--ro-bind-try "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" "/tmp/$WAYLAND_DISPLAY")
 fi
@@ -44,11 +48,16 @@ while true; do
 			library_write=0
 			shift
 			;;
+		--usage)
+			usage
+			exit 0
+			;;
 		--)
 			shift
 			break
 			;;
 		*)
+			usage
 			echo "unknown option $1"
 			exit 1
 			;;
@@ -72,7 +81,7 @@ bwrap \
 	--die-with-parent \
 	--ro-bind /run/opengl-driver /run/opengl-driver \
 	--bind "$INST_DIR" "$INST_DIR" \
-	--$(if $library_write; then echo "bind"; else echo "ro-bind"; fi) "$HOME/.local/share/PrismLauncher/libraries" "$HOME/.local/share/PrismLauncher/libraries" \
+	--"$(if $library_write; then echo "bind"; else echo "ro-bind"; fi)" "$HOME/.local/share/PrismLauncher/libraries" "$HOME/.local/share/PrismLauncher/libraries" \
 	--ro-bind "$HOME/.local/share/PrismLauncher/assets" "$HOME/.local/share/PrismLauncher/assets" \
 	--unsetenv XDG_CONFIG_DIRS \
 	--unsetenv DBUS_SESSION_BUS_ADDRESS \
