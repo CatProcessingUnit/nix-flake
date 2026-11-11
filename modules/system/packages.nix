@@ -3,7 +3,9 @@
 {
    environment.systemPackages = with pkgs; [
 	vim
-	#home-manager
+	iotop
+	lsof
+	fatrace
    ];
 
    programs = {
