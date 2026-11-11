@@ -50,7 +50,7 @@
 		initContent = let
 			c = config.lib.stylix.colors;
 		in ''
-			export PROMPT="%F{#${c.base09}}%~ %f%F{#${c.base0D}}%#%f "
+			export PROMPT="%F{#${c.base09}}%~/ %f%F{#${c.base0D}}%#%f "
 		'';
 	};
 	yazi = {
