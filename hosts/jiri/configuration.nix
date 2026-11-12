@@ -3,7 +3,8 @@
 {
    system.stateVersion = "26.11";
    boot = {
-   	kernelPackages = pkgs.linuxPackages_zen;
+   	#kernelPackages = pkgs.linuxPackages_zen;
+	kernelPackages = pkgs.linuxPackages_latest;
 	kernelParams = [
 		"pcie_aspm=off" # fixes system log spam
 	];
