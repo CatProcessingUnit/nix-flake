@@ -1,12 +1,14 @@
 {moduleInfo, ...}:
 {config, pkgs, lib, ...}:
 
-{
-	config = lib.mkIf (config.myFlake.desktop.env == "${moduleInfo.name}") {	
+let
+	cfg = config.myFlake.session;
+in {
+	config = lib.mkIf (cfg.desktopEnvironment == "${moduleInfo.name}") {	
 		services = {
 			desktopManager.plasma6.enable=true;
 			displayManager = {
-				defaultSession = if (config.myFlake.desktop.displayProtocol == "wayland")
+				defaultSession = if (cfg.displayProtocol == "wayland")
 					then "plasma"
 					else "plasmax11";
 			};

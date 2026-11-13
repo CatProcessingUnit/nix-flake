@@ -1,8 +1,8 @@
 {moduleInfo, ...}:
 {config, pkgs, lib, ...}:
 let
-	isWayland = (config.myFlake.desktop.displayProtocol == "wayland");
-	cfg = config.myFlake.desktop;
+	cfg = config.myFlake.session;
+	isWayland = (cfg.displayProtocol == "wayland");
 in {
 	config = lib.mkIf (cfg.displayManager == "${moduleInfo.name}") {
 		services.displayManager.sddm = {

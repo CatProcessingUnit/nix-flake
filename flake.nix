@@ -29,7 +29,7 @@
 			users = modules + "/users";
 			features = modules + "/features";
 			systemSettings = modules + "/system";
-			display = modules + "/display";
+			session = modules + "/session";
 		};
 		myLib = import ./myLib { inherit self inputs flakePaths; };
 	in 

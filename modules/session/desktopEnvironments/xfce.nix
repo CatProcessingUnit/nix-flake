@@ -1,11 +1,13 @@
 {moduleInfo, ...}:
 {config, pkgs, lib, ...}:
 	
-{
-	config = lib.mkIf (config.myFlake.desktop.env == "${moduleInfo.name}") {
+let
+	cfg = config.myFlake.session;
+in {
+	config = lib.mkIf (cfg.desktopEnvironment == "${moduleInfo.name}") {
 		assertions = [
 			{
-				assertion = config.myFlake.desktop.displayProtocol == "x11";
+				assertion = cfg.displayProtocol == "x11";
 				message = "only x11 is supported";
 			}
 		];

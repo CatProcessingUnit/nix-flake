@@ -28,7 +28,7 @@ let
 			features
 			users
 			systemSettings
-			display
+			session
 			home
 
 			inputs.stylix.nixosModules.stylix

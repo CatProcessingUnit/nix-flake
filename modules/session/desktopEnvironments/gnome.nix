@@ -2,9 +2,9 @@
 {config, lib, pkgs, ...}:
 
 let
-   cfg = config.myFlake.desktop;
+   cfg = config.myFlake.session;
 in {
-   config = lib.mkIf (cfg.env == "${moduleInfo.name}") {
+   config = lib.mkIf (cfg.desktopEnvironment == "${moduleInfo.name}") {
 	services = {
 		desktopManager = {
 			gnome.enable = true;

@@ -22,8 +22,8 @@
 			isAdmin = true;
 		};
 	   };
-	   desktop = {
-		env = "plasma";
+	   session = {
+		desktopEnvironment = "plasma";
 		displayProtocol = "wayland";
 		displayManager = "ly";
 	   };

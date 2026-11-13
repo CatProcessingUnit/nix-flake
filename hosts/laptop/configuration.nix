@@ -2,8 +2,8 @@
 
 {
    myFlake = {
-	   desktop = {
-		env = "i3";
+	   session = {
+		windowManager = "i3";
 		displayProtocol = "x11";
 		displayManager = "ly";
 	   };

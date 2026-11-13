@@ -1,8 +1,10 @@
 {moduleInfo, ...}:
 {pkgs, config, lib, ...}: 
 
-{
-   config = lib.mkIf (config.myFlake.desktop.env == "${moduleInfo.name}") {	
+let
+	cfg = config.myFlake.session;
+in {
+   config = lib.mkIf (cfg.windowManager == "${moduleInfo.name}") {	
 	programs.hyprland = {
 		# includes desktop portal
 		enable = true;

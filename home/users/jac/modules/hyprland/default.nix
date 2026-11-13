@@ -1,7 +1,7 @@
 {myFlake, lib, pkgs, stylix, config, ...}:
 
 {
-	config = lib.mkIf (myFlake.desktop.env == "hyprland" ){
+	config = lib.mkIf (myFlake.session.windowManager == "hyprland" ){
 		fonts.fontconfig.enable = true;
 		home = {
 			packages = with pkgs; [ 

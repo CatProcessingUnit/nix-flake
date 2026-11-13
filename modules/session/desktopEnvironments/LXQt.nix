@@ -1,8 +1,10 @@
 {moduleInfo, ...}:
 {config, pkgs, lib, ...}:
 
-{
-   config = lib.mkIf (config.myFlake.desktop.env == "${moduleInfo.name}") {
+let
+	cfg = config.myFlake.session;
+in {
+   config = lib.mkIf (cfg.desktopEnvironment == "${moduleInfo.name}") {
 	services.xserver.desktopManager.lxqt.enable = true;
    	services.displayManager.defaultSession = "lxqt";
    };

@@ -7,10 +7,15 @@ let
 			(lib.attrsToList (builtins.readDir path))
 		);
 in {
-	options.myFlake.desktop = {
-		env = lib.mkOption {
-			type = lib.types.nullOr (mkModuleSelect ./gui);
+	options.myFlake.session = {
+		desktopEnvironment = lib.mkOption {
+			type = lib.types.nullOr (mkModuleSelect ./desktopEnvironments);
 			description = "select DE";
+			default = builtins.null;
+		};
+		windowManager = lib.mkOption {
+			type = lib.types.nullOr (mkModuleSelect ./windowManagers);
+			description = "select a window manager";
 			default = builtins.null;
 		};
 		displayProtocol = lib.mkOption {
@@ -31,7 +36,8 @@ in {
 	};
 
 	imports = 
-		myLib.importAllFrom ./gui { inheritModuleInfo = true; } ++
+		myLib.importAllFrom ./desktopEnvironments { inheritModuleInfo = true; } ++
+		myLib.importAllFrom ./windowManagers { inheritModuleInfo = true; } ++
 		myLib.importAllFrom ./displayProtocol { inheritModuleInfo = true; } ++
 		myLib.importAllFrom ./displayManagers { inheritModuleInfo = true; };
 	

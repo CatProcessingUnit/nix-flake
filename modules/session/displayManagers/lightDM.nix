@@ -1,8 +1,10 @@
 {moduleInfo, ...}:
 {config, lib, ...}:
 
-{
-   config = lib.mkIf (config.myFlake.desktop.displayManager == "${moduleInfo.name}") {
+let
+	cfg = config.myFlake.session;
+in {
+   config = lib.mkIf (cfg.displayManager == "${moduleInfo.name}") {
 	   services.xserver.displayManager.lightdm = {
 		enable = true;
 	   };
