@@ -23,7 +23,6 @@ in {
 				];
 			};
 		};
-		displayManager.defaultSession = "none+i3";
 	};
    };
 }

@@ -16,6 +16,5 @@ in {
 			xterm.enable = false;
 			xfce.enable = true;
 		};
-		services.displayManager.defaultSession = "xfce";
 	};
 }

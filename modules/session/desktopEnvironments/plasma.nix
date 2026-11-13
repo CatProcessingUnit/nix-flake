@@ -7,11 +7,6 @@ in {
 	config = lib.mkIf (cfg.desktopEnvironment == "${moduleInfo.name}") {	
 		services = {
 			desktopManager.plasma6.enable=true;
-			displayManager = {
-				defaultSession = if (cfg.displayProtocol == "wayland")
-					then "plasma"
-					else "plasmax11";
-			};
 		};
 		xdg.portal.extraPortals = with pkgs; [ kdePackages.xdg-desktop-portal-kde ];
 		

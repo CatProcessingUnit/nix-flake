@@ -6,6 +6,5 @@ let
 in {
    config = lib.mkIf (cfg.desktopEnvironment == "${moduleInfo.name}") {
 	services.xserver.desktopManager.lxqt.enable = true;
-   	services.displayManager.defaultSession = "lxqt";
    };
 }
