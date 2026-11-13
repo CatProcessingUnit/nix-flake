@@ -7,6 +7,7 @@ set -x
 args=()
 library_write=1
 
+# todo: add usage
 usage() {
 	echo ""
 }
@@ -24,6 +25,8 @@ while true; do
 				--dev-bind-try /dev/nvidia-modeset /dev/nvidia-modeset \
 				--dev-bind-try /dev/nvidia-uvm /dev/nvidia-uvm \
 				--dev-bind-try /dev/nvidia-uvm-tools /dev/nvidia-uvm-tools \
+				--bind-try "$HOME/.nv/ComputeCache" "$HOME/.nv/ComputeCache" \
+				--bind-try "$HOME/.cache/nvidia" "$HOME/.cache/nvidia"
 				)
 			shift
 			;;
