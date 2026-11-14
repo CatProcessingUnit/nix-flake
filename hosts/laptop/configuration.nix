@@ -30,6 +30,6 @@
    	enable = true;
 	base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
    };
-   boot.kernelPackages = pkgs.linuxPackages_zen;
+   #boot.kernelPackages = pkgs.linuxPackages_zen;
    system.stateVersion = "26.05";
 }
